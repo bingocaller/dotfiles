@@ -1,0 +1,52 @@
+" -------
+" Plugins
+" -------
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'dag/vim-fish'
+call plug#end()
+
+" ------------------
+" <leader> = <Space>
+" ------------------
+let mapleader = " "
+
+" -------
+" Options
+" -------
+set number
+set relativenumber
+
+" ----------
+" Remappings
+" ----------
+
+" Normal mode
+" Zero moves to first character on line instead of beginning of line
+nmap 0 ^
+" Move up and down by visible lines if current line is wrapped
+nmap j gj
+nmap k gk
+
+" Insert mode
+imap <C-s> <esc>:w<cr>
+
+" Leader mappings
+" Split edit .vimrc
+nmap <leader>vr :sp $MYVIMRC<cr>
+" Source (reload) .vimrc
+nmap <leader>so :source $MYVIMRC<cr>
+
+" Autocommands
+" Bind `q` to close the buffer for help files
+autocmd Filetype help nnoremap <buffer> q :q<CR>
