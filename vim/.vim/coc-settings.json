@@ -1,0 +1,8 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [ "javascript", "javascriptreact", "typescript", "typescriptreact" ],
+  "coc.preferences.formatOnType": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "prettier.disableSuccessMessage": true,
+  "tsserver.formatOnType": true
+}

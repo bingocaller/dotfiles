@@ -1,21 +1,3 @@
-" -------
-" Plugins
-" -------
-
-if empty(glob('~/.vim/autoload/plug.vim'))
-	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'dag/vim-fish'
-call plug#end()
-
 " ------------------
 " <leader> = <Space>
 " ------------------
@@ -24,29 +6,346 @@ let mapleader = " "
 " -------
 " Options
 " -------
+" Show relative line numbers in gutter
 set number
 set relativenumber
+
+" Don't wrap lines by default
+set nowrap
+
+" Stop folding stuff!
+set nofoldenable
+
+" Indentation
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
+" Some servers have issues with backup files.
+" See https://github.com/neoclide/coc.nvim/issues/649
+set nobackup
+set nowritebackup
+
+" We don't want to deal with this in .gitignore
+set noswapfile
+
+" Show partial command keys in the status line
+set showcmd
+
+" Automatically :write before running commands
+set autowrite
+
+" Ignore case unless capital letters are used
+set ignorecase smartcase
+
+" assume the /g flag on :s substitutions to replace all matches in a line
+set gdefault 
+
+" Disable modelines as a security precaution
+set modelines=0
+set nomodeline
+
+" Use ripgrep instead of grep
+set grepprg=rg
+
+" Always use Python 3
+set pyxversion=3
 
 " ----------
 " Remappings
 " ----------
 
-" Normal mode
 " Zero moves to first character on line instead of beginning of line
 nmap 0 ^
 " Move up and down by visible lines if current line is wrapped
 nmap j gj
 nmap k gk
 
-" Insert mode
+" Save from insert mode
 imap <C-s> <esc>:w<cr>
+
+" Expand Emmet abbreviation
+imap <S-tab> <plug>(emmet-expand-abbr)
 
 " Leader mappings
 " Split edit .vimrc
 nmap <leader>vr :sp $MYVIMRC<cr>
 " Source (reload) .vimrc
 nmap <leader>so :source $MYVIMRC<cr>
+" Install Plugins
+nmap <leader>pi :PlugInstall<cr>
+" Update tag (via Emmet)
+nmap <leader>u <plug>(emmet-update-tag)
+
+" Sort
+vmap <leader>sr :sort<cr>
+" Switch between the last two files
+nnoremap <leader><leader> <C-^>
+
+" RENAME CURRENT FILE (thanks Gary Bernhardt and Ben Orenstein)
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+map <leader>n :call RenameFile()<cr>
 
 " Autocommands
 " Bind `q` to close the buffer for help files
 autocmd Filetype help nnoremap <buffer> q :q<CR>
+" Force Vim to rescan entire buffer when highlighting large JSX/TSX files.
+" Disable when leaving.
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+
+" -------
+" Plugins
+" -------
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Skip vim-sensible for NeoVim
+if has('nvim')
+  let g:loaded_sensible=0
+endif
+
+call plug#begin('~/.vim/plugged')
+" Utilities & niceness
+Plug 'airblade/vim-gitgutter'
+Plug 'inkarkat/vim-ReplaceWithRegister'
+Plug 'machakann/vim-highlightedyank'
+Plug 'tommcdo/vim-exchange'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+Plug 'yggdroot/indentline'
+" Completions
+Plug 'mattn/emmet-vim'
+" FZF
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+" Conquer of Completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Syntax highlighting
+Plug 'sheerun/vim-polyglot'
+" styled-components
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+" Jinja / Nunjucks
+" Plug 'Glench/Vim-Jinja2-Syntax'
+" Fish
+Plug 'dag/vim-fish'
+" Color scheme
+Plug 'haishanh/night-owl.vim'
+call plug#end()
+
+" ---------------
+" Plugin settings
+" ---------------
+
+"  Netrw
+
+" 1. Make vertical splitting the default for previewing files
+" 2. Make the default listing style "tree"
+" 3. When a vertical preview window is opened, the directory listing
+" will use only 30% of the columns available; the rest of the window
+" is used for the preview window.
+let g:netrw_preview   = 1
+let g:netrw_liststyle = 3
+let g:netrw_winsize   = 30
+
+" pangloss/vim-javascript - Installed by vim-polyglot
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_flow = 1
+
+" maxmellon/vim-jsx-pretty - Installed by vim-polyglot
+" We let peitalin/vim-jsx-typescript (installed by vim-polyglot)
+" handle TSX hightligthing
+let g:vim_jsx_pretty_disable_tsx = 1
+
+" elzr/vim-json - Installed by vim-polyglot
+" Don't conceal quotes in JSON
+let g:vim_json_syntax_conceal = 0
+
+" haishanh/night-owl.vim
+if (has("termguicolors"))
+ set termguicolors
+endif
+" set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+colorscheme night-owl
+" Add better Tabline colours
+hi TabLineFill guifg=#02233e guibg=fg
+hi TabLine guibg=#023055 guifg=#4e6e88
+hi TabLineSel guibg=bg guifg=fg
+
+" machakann/vim-highlightedyank
+if !exists('##TextYankPost')
+  map y <Plug>(highlightedyank)
+endif
+
+" yggdroot/indentline
+let g:indentLine_char = "│"
+
+" ---
+" FZF
+" ---
+map <C-p> :Files<cr>
+map <C-b> :Buffers<cr>
+map <C-h> :History<cr>
+
+" ---
+" Coc
+" ---
+
+" From Coc example configuration
+" https://github.com/neoclide/coc.nvim#example-vim-configuration
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <C-Space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window, fallback to :help.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code. Works as a motion and with visual mode.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent> <leader>di :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <leader>ex  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <leader>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <leader>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <leader>sy  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+" nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+" nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+" nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
