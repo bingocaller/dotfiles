@@ -28,10 +28,10 @@ symbol = " "
 [git_branch]
 # prefix = "〈"
 symbol = " "
-style = "purple"
+# style = "purple"
 
 [git_commit]
-style = "green"
+# style = "green"
 
 [git_status]
 # Fancy stuff that doesn't quite work because of
@@ -57,13 +57,17 @@ style = "green"
 
 # Not-so-fancy stuff
 ahead = "↑"
+ahead_count.enabled = true
 behind = "↓"
+behind_count.enabled = true
 deleted = "✕"
 diverged = "↑↓"
-prefix = "❬"
-style = "blue"
-suffix = "❭ "
-
+diverged_count.enabled = true
+modified = "●"
+# prefix = "❬"
+style = "bold blue"
+# suffix = "❭ "
+# format = "[❬$all_status$ahead_behind❭]($style) "
 [golang]
 symbol = " "
 
@@ -107,3 +111,6 @@ symbol = " "
 
 [rust]
 symbol = " "
+
+[terraform]
+disabled = true
