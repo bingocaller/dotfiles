@@ -80,9 +80,6 @@ nmap <leader>so :source $MYVIMRC<cr>
 nmap <leader>pi :PlugInstall<cr>
 " Update tag (via Emmet)
 nmap <leader>u <plug>(emmet-update-tag)
-
-" Sort
-vmap <leader>sr :sort<cr>
 " Switch between the last two files
 nnoremap <leader><leader> <C-^>
 
@@ -123,6 +120,7 @@ endif
 call plug#begin('~/.vim/plugged')
 " Utilities & niceness
 Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-sort-motion'
 Plug 'inkarkat/vim-ReplaceWithRegister'
 Plug 'machakann/vim-highlightedyank'
 Plug 'tommcdo/vim-exchange'
