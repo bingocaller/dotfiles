@@ -148,8 +148,12 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " Conquer of Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Focus mode
+Plug 'junegunn/goyo.vim'
 " Syntax highlighting
 Plug 'sheerun/vim-polyglot'
+" Flow
+Plug 'flowtype/vim-flow'
 " styled-components
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 " Jinja / Nunjucks
