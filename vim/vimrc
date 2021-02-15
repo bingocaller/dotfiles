@@ -158,12 +158,19 @@ Plug 'sheerun/vim-polyglot'
 Plug 'flowtype/vim-flow'
 " styled-components
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+" Markdown preview.
+" This install method only works if nodejs and yarn are available
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " Jinja / Nunjucks
 " Plug 'Glench/Vim-Jinja2-Syntax'
 " Fish
 Plug 'dag/vim-fish'
 " Color scheme
 Plug 'haishanh/night-owl.vim'
+
+" vim-devicons has to be loaded last
+" https://github.com/ryanoasis/vim-devicons#installation
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
