@@ -222,9 +222,18 @@ let g:indentLine_char = "│"
 " ---
 " FZF
 " ---
+
 map <C-p> :Files<cr>
 map <C-b> :Buffers<cr>
 map <C-h> :History<cr>
+map <a-p> :Commands<cr>
+map <a-w> :Windows<cr>
+
+" Don't use window layout
+let g:fzf_layout = { 'down': '40%' }
+
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
 
 " Potentially disable some plugins
 " Skip vim-sensible in NeoVim
