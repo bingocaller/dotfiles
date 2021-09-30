@@ -166,7 +166,7 @@ Plug 'junegunn/fzf.vim'
 " Focus mode
 Plug 'junegunn/goyo.vim'
 " Syntax highlighting
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 " Flow
 Plug 'flowtype/vim-flow'
 " styled-components
@@ -187,10 +187,10 @@ if has('nvim')
     Plug 'lukas-reineke/indent-blankline.nvim'
     " Conquer of Completion
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    " Help coc-css with @s in SCSS files
-    autocmd FileType scss setl iskeyword+=@-@
     " Improved syntax highlighting
-    " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+    " Update commenstring dynamically, even in complex file types
+    Plug 'JoosepAlviste/nvim-ts-context-commentstring'
     " Markdown preview.
     " This install method only works if nodejs and yarn are available
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
