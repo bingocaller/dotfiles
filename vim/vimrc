@@ -20,6 +20,16 @@ set softtabstop=4
 set splitbelow
 set splitright
 
+" Don't drop undo history when abandoning a buffer
+set hidden
+
+" Persistent undo, requires the presence of ~/.vim/undo directory!
+" set undofile
+" set undodir=$HOME/.vim/undo
+
+" set undolevels=1000
+" set undoreload=10000
+
 " Some servers have issues with backup files.
 " See https://github.com/neoclide/coc.nvim/issues/649
 set nobackup
@@ -49,6 +59,7 @@ set grepprg=rg
 
 " Always use Python 3
 set pyxversion=3
+let g:python3_host_prog = "/usr/local/bin/python3"
 
 " ----------
 " Remappings
@@ -59,6 +70,8 @@ nmap 0 ^
 " Move up and down by visible lines if current line is wrapped
 nmap j gj
 nmap k gk
+" Y yanks to end of line instead of the entire line
+nmap Y y$
 
 " Save from insert mode
 imap <C-s> <esc>:w<cr>
@@ -108,13 +121,12 @@ autocmd Filetype help nnoremap <buffer> q :q<CR>
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
-" Disable concealing in Markdown files, re-enable when leaving
-autocmd BufEnter *.{md,mdx} :set conceallevel=0
-autocmd BufLeave *.{md,mdx} :set conceallevel=2
-"
 " Enable wrapping in Markdown files, disable when leaving
-autocmd BufEnter *.{md,mdx} :set wrap
+autocmd BufEnter,BufNewFile,BufRead *.{md,mdx} :set wrap
 autocmd BufLeave *.{md,mdx} :set nowrap
+
+" Force Nunjucks files to register as such
+autocmd BufEnter,BufNewFile,BufRead *.{njk,nunjucks,jinja} :set filetype=jinja.html
 
 " -------
 " Plugins
@@ -143,13 +155,14 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'yggdroot/indentline'
+" Custom text objects
+Plug 'kana/vim-textobj-user'
+Plug 'jasonlong/vim-textobj-css'
 " Completions
 Plug 'mattn/emmet-vim'
 " FZF
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" Conquer of Completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Focus mode
 Plug 'junegunn/goyo.vim'
 " Syntax highlighting
@@ -158,19 +171,35 @@ Plug 'sheerun/vim-polyglot'
 Plug 'flowtype/vim-flow'
 " styled-components
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-" Markdown preview.
-" This install method only works if nodejs and yarn are available
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " Jinja / Nunjucks
 " Plug 'Glench/Vim-Jinja2-Syntax'
+" Plug 'lepture/vim-jinja'
 " Fish
 Plug 'dag/vim-fish'
 " Color scheme
 Plug 'haishanh/night-owl.vim'
 
-" vim-devicons has to be loaded last
-" https://github.com/ryanoasis/vim-devicons#installation
-Plug 'ryanoasis/vim-devicons'
+if has('nvim')
+    " nvim-tree (file explorer)
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'kyazdani42/nvim-tree.lua'
+    " Indent blank lines
+    Plug 'lukas-reineke/indent-blankline.nvim'
+    " Conquer of Completion
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Help coc-css with @s in SCSS files
+    autocmd FileType scss setl iskeyword+=@-@
+    " Improved syntax highlighting
+    " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+    " Markdown preview.
+    " This install method only works if nodejs and yarn are available
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+else
+    " vim-devicons has to be loaded last and we don't want to load it
+    " alongside nvim-web-devicons
+    " https://github.com/ryanoasis/vim-devicons#installation
+    Plug 'ryanoasis/vim-devicons'
+endif
 
 call plug#end()
 
@@ -179,12 +208,25 @@ call plug#end()
 " ---------------
 
 "  Netrw
-
 " Make the default listing style "tree"
 let g:netrw_liststyle = 3
 
+" nvim-tree
+let g:nvim_tree_side = 'right' "left by default
+let g:nvim_tree_width = 40 "30 by default
+let g:nvim_tree_gitignore = 1 "0 by default
+let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
+let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
+let g:nvim_tree_quit_on_open = 1 "0 by default, closes the tree when you open a file
+let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
+let g:nvim_tree_lsp_diagnostics = 1 "0 by default, will show lsp diagnostics in the signcolumn. See :help nvim_tree_lsp_diagnostics
+
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
+
 " Airline
-let g:airline_theme='night_owl'
+let g:airline_theme = 'night_owl'
 
 " pangloss/vim-javascript - Installed by vim-polyglot
 let g:javascript_plugin_jsdoc = 1
@@ -198,6 +240,15 @@ let g:vim_jsx_pretty_disable_tsx = 1
 " elzr/vim-json - Installed by vim-polyglot
 " Don't conceal quotes in JSON
 let g:vim_json_syntax_conceal = 0
+
+" plasticboy/vim-markdown - Installed by vim-polyglot
+" Disable concealing
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
+" Enable YAML Frontmatter
+let g:vim_markdown_frontmatter = 1
+" Enable strikethrough
+let g:vim_markdown_strikethrough = 1
 
 " haishanh/night-owl.vim
 if (has("termguicolors"))
@@ -230,6 +281,11 @@ map <C-h> :History<cr>
 map <a-p> :Commands<cr>
 map <a-w> :Windows<cr>
 
+" Search for word under cursor within project.
+nnoremap <C-f> :Rg <C-R><C-W><cr>
+" Search for selected text withing project using f(ind) register
+vnoremap <C-f> "fy:Rg <C-R>f<C-W><cr>
+
 " Don't use window layout
 let g:fzf_layout = { 'down': '40%' }
 
@@ -239,23 +295,30 @@ let g:fzf_buffers_jump = 1
 " Potentially disable some plugins
 " Skip vim-sensible in NeoVim
 if has('nvim')
-    let g:loaded_sensible=0
+    let g:loaded_sensible = 0
+    let g:vinegar = 0
+endif
+
+" Specify Node path for neovim via Volta
+" https://github.com/volta-cli/volta/issues/866#issuecomment-730476125
+if executable('volta')
+  let g:node_host_prog = trim(system("volta which neovim-node-host"))
 endif
 
 " Skip stuff handled by VSCod(e|ium)
 if exists('g:vscode')
-    let g:loaded_airline=0
-    let g:loaded_airline_themes=0
-    let g:loaded_commentary=0
-    let g:loaded_emmet_vim=0
-    let g:loaded_flow=0
-    let g:loaded_fzf=0
-    let g:loaded_fzf_vim=0
-    let g:loaded_gitgutter=0
-    let g:loaded_netrw=0
-    let g:loaded_netrwPlugin=0
-    " let g:loaded_python3_provider=0
-    " let g:loaded_python_provider=0
-    " let g:loaded_ruby_provider=0
+    let g:loaded_airline = 0
+    let g:loaded_airline_themes = 0
+    let g:loaded_commentary = 0
+    let g:loaded_emmet_vim = 0
+    let g:loaded_flow = 0
+    let g:loaded_fzf = 0
+    let g:loaded_fzf_vim = 0
+    let g:loaded_gitgutter = 0
+    let g:loaded_netrw = 0
+    let g:loaded_netrwPlugin = 0
+    " let g:loaded_python3_provider = 0
+    " let g:loaded_python_provider = 0
+    " let g:loaded_ruby_provider = 0
 endif
 

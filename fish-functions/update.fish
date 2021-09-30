@@ -7,6 +7,6 @@ function update
     echo -e "\n-----------------------\nUPDATING APPLE SOFTWARE\n-----------------------\n"; sudo softwareupdate -i -a &&
     echo -e "\n-----------------\nUPDATING HOMEBREW\n-----------------\n"; brew update && brew upgrade &&
     echo -e "\n------------\nBREW CLEANUP\n------------\n"; brew cleanup &&
-    echo -e "\n----------\nNPM UPDATE\n----------\n"; npm install npm -g && npm update -g &&
+    echo -e "\n----------\nNPM UPDATE\n----------\n"; npm-check -gu &&
     echo -e "\n---------------------\nUPDATING FISH PLUGINS\n---------------------\n"; fisher update
 end

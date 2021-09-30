@@ -1,11 +1,8 @@
-status --is-interactive; and source (pyenv init -|psub)
-status --is-interactive; and source (rbenv init -|psub)
-
 # # Use ripgrep for FZF
-# if test -f rg
-# 	and test -x rg
-# 	set -gx FZF_DEFAULT_COMMAND='rg --files --hidden'
-# end
+if test -f rg
+	and test -x rg
+	set -gx FZF_DEFAULT_COMMAND='rg --files --hidden'
+end
 
 # Set nvim as default visual editor unless we're inside an
 # nvim instance, in which case use neovim-remote (nvr).
@@ -16,10 +13,12 @@ else
 	set -gx VISUAL nvim
 end
 
-# Init Starship - https://starship.rs
-starship init fish | source
-
 # Init zoxide - https://github.com/ajeetdsouza/zoxide
 zoxide init fish | source
-set -gx VOLTA_HOME "$HOME/.volta"
-set -gx PATH "$VOLTA_HOME/bin" $PATH
+
+# Volta
+# set -gx VOLTA_HOME "$HOME/.volta"
+# set -gx PATH "$VOLTA_HOME/bin" $PATH
+
+# Init Starship - https://starship.rs
+# starship init fish | source

@@ -8,6 +8,9 @@ source ~/.vimrc
 "  Make search/replace interactive without the split pane
 set inccommand=nosplit
 
+" Don't load Python2 provider
+let g:loaded_python_provider = 0
+
 if exists('g:vscode')
     " Let VSCod(e|ium) handle things
     source $HOME/.config/nvim/vscode/settings.vim
@@ -158,12 +161,7 @@ else
     " nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
     " noremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
     " noremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-    " Helpful terminal mode shortcuts
-    " Switch to normal mode with <Esc>
-    " tnoremap <Esc> <C-\><C-n>
-    " Backup Esc event
-    " tnoremap <A-[> <Esc>
-    tnoremap <A-[> <C-\><C-n>
+    
     " Window switching
     " Alt + hjkl: jump between windows
     " Alt + HJKL: move windows around
@@ -183,10 +181,41 @@ else
     nnoremap <a-J> <c-w>J
     nnoremap <a-K> <c-w>K
     nnoremap <a-L> <c-w>L
-    " Paste into terminal from register
-    tnoremap <expr> <A-r> '<C-\><C-n>"'.nr2char(getchar()).'pi'
+
+    " Tab switching
+    tnoremap <a-]> <c-\><c-n>gt
+    nnoremap <a-]> gt
+    tnoremap <a-[> <c-\><c-n>gT
+    nnoremap <a-[> gT
+
+    tnoremap <a-1> <c-\><c-n>1gt
+    tnoremap <a-2> <c-\><c-n>2gt
+    tnoremap <a-3> <c-\><c-n>3gt
+    tnoremap <a-4> <c-\><c-n>4gt
+    tnoremap <a-5> <c-\><c-n>5gt
+    tnoremap <a-6> <c-\><c-n>6gt
+    tnoremap <a-7> <c-\><c-n>7gt
+    tnoremap <a-8> <c-\><c-n>8gt
+    tnoremap <a-9> <c-\><c-n>9gt
+    nnoremap <a-1> 1gt
+    nnoremap <a-2> 2gt
+    nnoremap <a-3> 3gt
+    nnoremap <a-4> 4gt
+    nnoremap <a-5> 5gt
+    nnoremap <a-6> 6gt
+    nnoremap <a-7> 7gt
+    nnoremap <a-8> 8gt
+    nnoremap <a-9> 9gt
 
     " Open terminal
     nnoremap <leader>t :terminal<cr>
+    " Helpful terminal mode shortcuts
+    " Switch to normal mode with <Esc>
+    " tnoremap <Esc> <C-\><C-n>
+    " Backup Esc event
+    " tnoremap <A-[> <Esc>
+    tnoremap <A-[> <C-\><C-n>
+    " Paste into terminal from register
+    tnoremap <expr> <A-r> '<C-\><C-n>"'.nr2char(getchar()).'pi'
 endif
 
