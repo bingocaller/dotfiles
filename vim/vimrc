@@ -183,6 +183,8 @@ if has('nvim')
     " nvim-tree (file explorer)
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'kyazdani42/nvim-tree.lua'
+    " Lualine
+    Plug 'hoob3rt/lualine.nvim'
     " Indent blank lines
     Plug 'lukas-reineke/indent-blankline.nvim'
     " Conquer of Completion
@@ -295,6 +297,10 @@ let g:fzf_buffers_jump = 1
 " Potentially disable some plugins
 " Skip vim-sensible in NeoVim
 if has('nvim')
+    " We're using Lualine in NeoVim
+    let g:loaded_airline = 0
+    let g:loaded_airline_themes = 0
+
     let g:loaded_sensible = 0
     let g:vinegar = 0
 endif

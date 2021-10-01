@@ -84,6 +84,9 @@ require'nvim-treesitter.configs'.setup {
         enable = true
     }
 }
+require'lualine'.setup {
+    options = {theme = 'material'}
+}
 EOF
 
 if exists('g:vscode')
