@@ -52,10 +52,6 @@ set gdefault
 
 " Disable modelines as a security precaution
 set modelines=0
-set nomodeline
-
-" Use ripgrep instead of grep
-set grepprg=rg
 
 " Always use Python 3
 set pyxversion=3
@@ -82,36 +78,38 @@ imap <S-tab> <plug>(emmet-expand-abbr)
 " ------------------
 " Leader mappings (disable in VSCod(e|ium)
 " ------------------
+" <leader> = <Space>
+let mapleader = " "
 
-if !exists('g:vscode')
-    " <leader> = <Space>
-    let mapleader = " "
+" Split edit .vimrc
+nmap <leader>vr :sp $MYVIMRC<cr>
+" Source (reload) .vimrc
+nmap <leader>so :source $MYVIMRC<cr>
+" Install Plugins
+nmap <leader>pi :PlugInstall<cr>
+" Remove highlight, e.g. after search
+nmap <leader>hh :nohlsearch<cr>
+" Update tag (via Emmet)
+nmap <leader>u <plug>(emmet-update-tag)
+" Switch between the last two files
+nnoremap <leader><leader> <C-^>
 
-    " Split edit .vimrc
-    nmap <leader>vr :sp $MYVIMRC<cr>
-    " Source (reload) .vimrc
-    nmap <leader>so :source $MYVIMRC<cr>
-    " Install Plugins
-    nmap <leader>pi :PlugInstall<cr>
-    " Remove highlight, e.g. after search
-    nmap <leader>hh :nohlsearch<cr>
-    " Update tag (via Emmet)
-    nmap <leader>u <plug>(emmet-update-tag)
-    " Switch between the last two files
-    nnoremap <leader><leader> <C-^>
+" Search for word under cursor within project.
+nnoremap <C-f> :Rg <C-R><C-W><cr>
+" Search for selected text withing project using f(ind) register
+vnoremap <C-f> "fy:Rg <C-R>f<C-W><cr>
 
-    " RENAME CURRENT FILE (thanks Gary Bernhardt and Ben Orenstein)
-    function! RenameFile()
-        let old_name = expand('%')
-        let new_name = input('New file name: ', expand('%'), 'file')
-        if new_name != '' && new_name != old_name
-            exec ':saveas ' . new_name
-            exec ':silent !rm ' . old_name
-            redraw!
-        endif
-    endfunction
-    map <leader>n :call RenameFile()<cr>
-endif
+" RENAME CURRENT FILE (thanks Gary Bernhardt and Ben Orenstein)
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <leader>r :call RenameFile()<cr>
 
 " Autocommands
 " Bind `q` to close the buffer for help files
@@ -127,204 +125,4 @@ autocmd BufLeave *.{md,mdx} :set nowrap
 
 " Force Nunjucks files to register as such
 autocmd BufEnter,BufNewFile,BufRead *.{njk,nunjucks,jinja} :set filetype=jinja.html
-
-" -------
-" Plugins
-" -------
-
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin('~/.vim/plugged')
-" Utilities & niceness
-Plug 'airblade/vim-gitgutter'
-Plug 'christoomey/vim-sort-motion'
-Plug 'inkarkat/vim-ReplaceWithRegister'
-Plug 'machakann/vim-highlightedyank'
-Plug 'tommcdo/vim-exchange'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'yggdroot/indentline'
-" Custom text objects
-Plug 'kana/vim-textobj-user'
-Plug 'jasonlong/vim-textobj-css'
-" Completions
-Plug 'mattn/emmet-vim'
-" FZF
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-" Focus mode
-Plug 'junegunn/goyo.vim'
-" Syntax highlighting
-" Plug 'sheerun/vim-polyglot'
-" Flow
-Plug 'flowtype/vim-flow'
-" styled-components
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-" Jinja / Nunjucks
-" Plug 'Glench/Vim-Jinja2-Syntax'
-" Plug 'lepture/vim-jinja'
-" Fish
-Plug 'dag/vim-fish'
-" Color scheme
-Plug 'haishanh/night-owl.vim'
-
-if has('nvim')
-    " nvim-tree (file explorer)
-    Plug 'kyazdani42/nvim-web-devicons'
-    Plug 'kyazdani42/nvim-tree.lua'
-    " Lualine
-    Plug 'hoob3rt/lualine.nvim'
-    " Indent blank lines
-    Plug 'lukas-reineke/indent-blankline.nvim'
-    " Conquer of Completion
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    " Improved syntax highlighting
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-    " Update commenstring dynamically, even in complex file types
-    Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-    " Markdown preview.
-    " This install method only works if nodejs and yarn are available
-    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-else
-    " vim-devicons has to be loaded last and we don't want to load it
-    " alongside nvim-web-devicons
-    " https://github.com/ryanoasis/vim-devicons#installation
-    Plug 'ryanoasis/vim-devicons'
-endif
-
-call plug#end()
-
-" ---------------
-" Plugin settings
-" ---------------
-
-"  Netrw
-" Make the default listing style "tree"
-let g:netrw_liststyle = 3
-
-" nvim-tree
-let g:nvim_tree_side = 'right' "left by default
-let g:nvim_tree_width = 40 "30 by default
-let g:nvim_tree_gitignore = 1 "0 by default
-let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
-let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
-let g:nvim_tree_quit_on_open = 1 "0 by default, closes the tree when you open a file
-let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
-let g:nvim_tree_lsp_diagnostics = 1 "0 by default, will show lsp diagnostics in the signcolumn. See :help nvim_tree_lsp_diagnostics
-
-nnoremap <C-n> :NvimTreeToggle<CR>
-nnoremap <leader>r :NvimTreeRefresh<CR>
-nnoremap <leader>n :NvimTreeFindFile<CR>
-
-" Airline
-let g:airline_theme = 'night_owl'
-
-" pangloss/vim-javascript - Installed by vim-polyglot
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_flow = 1
-
-" maxmellon/vim-jsx-pretty - Installed by vim-polyglot
-" We let peitalin/vim-jsx-typescript (installed by vim-polyglot)
-" handle TSX hightligthing
-let g:vim_jsx_pretty_disable_tsx = 1
-
-" elzr/vim-json - Installed by vim-polyglot
-" Don't conceal quotes in JSON
-let g:vim_json_syntax_conceal = 0
-
-" plasticboy/vim-markdown - Installed by vim-polyglot
-" Disable concealing
-let g:vim_markdown_conceal = 0
-let g:vim_markdown_conceal_code_blocks = 0
-" Enable YAML Frontmatter
-let g:vim_markdown_frontmatter = 1
-" Enable strikethrough
-let g:vim_markdown_strikethrough = 1
-
-" haishanh/night-owl.vim
-if (has("termguicolors"))
-    set termguicolors
-endif
-" set Vim-specific sequences for RGB colors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-colorscheme night-owl
-" Add better Tabline colours
-hi TabLineFill guifg=#02233e guibg=fg
-hi TabLine guibg=#023055 guifg=#4e6e88
-hi TabLineSel guibg=bg guifg=fg
-
-" machakann/vim-highlightedyank
-if !exists('##TextYankPost')
-    map y <Plug>(highlightedyank)
-endif
-
-" yggdroot/indentline
-let g:indentLine_char = "│"
-
-" ---
-" FZF
-" ---
-
-map <C-p> :Files<cr>
-map <C-b> :Buffers<cr>
-map <C-h> :History<cr>
-map <a-p> :Commands<cr>
-map <a-w> :Windows<cr>
-
-" Search for word under cursor within project.
-nnoremap <C-f> :Rg <C-R><C-W><cr>
-" Search for selected text withing project using f(ind) register
-vnoremap <C-f> "fy:Rg <C-R>f<C-W><cr>
-
-" Don't use window layout
-let g:fzf_layout = { 'down': '40%' }
-
-" [Buffers] Jump to the existing window if possible
-let g:fzf_buffers_jump = 1
-
-" Potentially disable some plugins
-" Skip vim-sensible in NeoVim
-if has('nvim')
-    " We're using Lualine in NeoVim
-    let g:loaded_airline = 0
-    let g:loaded_airline_themes = 0
-
-    let g:loaded_sensible = 0
-    let g:vinegar = 0
-endif
-
-" Specify Node path for neovim via Volta
-" https://github.com/volta-cli/volta/issues/866#issuecomment-730476125
-if executable('volta')
-  let g:node_host_prog = trim(system("volta which neovim-node-host"))
-endif
-
-" Skip stuff handled by VSCod(e|ium)
-if exists('g:vscode')
-    let g:loaded_airline = 0
-    let g:loaded_airline_themes = 0
-    let g:loaded_commentary = 0
-    let g:loaded_emmet_vim = 0
-    let g:loaded_flow = 0
-    let g:loaded_fzf = 0
-    let g:loaded_fzf_vim = 0
-    let g:loaded_gitgutter = 0
-    let g:loaded_netrw = 0
-    let g:loaded_netrwPlugin = 0
-    " let g:loaded_python3_provider = 0
-    " let g:loaded_python_provider = 0
-    " let g:loaded_ruby_provider = 0
-endif
 
