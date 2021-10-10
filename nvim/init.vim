@@ -8,6 +8,8 @@ set inccommand=nosplit
 " Don't load Python2 provider
 let g:loaded_python_provider = 0
 
+let g:markdown_fenced_languages = [ 'html', 'javascript', 'typescript', 'css', 'scss', 'lua', 'vim' ]
+
 " ----------------
 " Window switching
 " ----------------
@@ -77,6 +79,37 @@ if executable('volta')
   let g:node_host_prog = trim(system("volta which neovim-node-host"))
 endif
 
+" ---------------
+" Code completion
+" ---------------
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Completion menu tweaks: show menu, show even if only one option is
+" available, don't select anything automatically.
+" Default value: menu,preview
+set completeopt=menu,menuone,noselect
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+    " Recently vim can merge signcolumn and number column into one
+    set signcolumn=number
+else
+    set signcolumn=yes
+endif
+
+" " Highlight the symbol and its references when holding the cursor.
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+
 " -------
 " Plugins
 " -------
@@ -110,9 +143,9 @@ Plug 'junegunn/fzf.vim'
 " Focus mode
 Plug 'junegunn/goyo.vim'
 " Flow
-Plug 'flowtype/vim-flow'
+" Plug 'flowtype/vim-flow'
 " styled-components
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+" Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 " Jinja / Nunjucks
 " Plug 'Glench/Vim-Jinja2-Syntax'
 " Plug 'lepture/vim-jinja'
@@ -132,6 +165,12 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " LSP Config
 Plug 'neovim/nvim-lspconfig'
+" Autocomplete
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/nvim-cmp'
+
+Plug 'mhartington/formatter.nvim'
 
 " Markdown preview.
 " This install method only works if nodejs and yarn are available
@@ -191,25 +230,6 @@ let g:fzf_buffers_jump = 1
 
 " " From Coc example configuration
 " " https://github.com/neoclide/coc.nvim#example-vim-configuration
-
-" " Give more space for displaying messages.
-" set cmdheight=2
-
-" " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" " delays and poor user experience.
-" set updatetime=300
-
-" " Don't pass messages to |ins-completion-menu|.
-" set shortmess+=c
-
-" " Always show the signcolumn, otherwise it would shift the text each time
-" " diagnostics appear/become resolved.
-" if has("patch-8.1.1564")
-"     " Recently vim can merge signcolumn and number column into one
-"     set signcolumn=number
-" else
-"     set signcolumn=yes
-" endif
 
 " " Use tab for trigger completion with characters ahead and navigate.
 " " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -373,7 +393,11 @@ require'lualine'.setup {
 }
 EOF
 
+" ----------------
 " Language servers
+" ----------------
+"
+
 lua << EOF
 local nvim_lsp = require('lspconfig')
 
@@ -419,7 +443,9 @@ end
 local servers = {
     'bashls',
     'cmake',
-    'denols',
+    -- Deno needs a bit more setup in order to coexist with tsserver
+    -- See https://github.com/neovim/nvim-lspconfig/issues/927
+    -- 'denols', 
     'dockerls',
     'pyright',
     'rust_analyzer',
@@ -444,10 +470,25 @@ end
 -- Language servers that require more custom configuration
 ----------------------------------------------------------
 
+-- Emmet (https://github.com/aca/emmet-ls)
+
+if not nvim_lsp.emmet_ls then    
+  require'lspconfig/configs'.emmet_ls = {    
+    default_config = {    
+      cmd = {'emmet-ls', '--stdio'};
+      filetypes = {'html', 'css', 'scss', 'jsx', 'tsx'};
+      root_dir = function(fname)    
+        return vim.loop.cwd()
+      end;    
+      settings = {};
+    };    
+  }    
+end    
+
 -- CSS, HTML, JSON
 -- Provided by https://github.com/hrsh7th/vscode-langservers-extracted
 
-local capabilities_servers = { 'cssls', 'html', 'jsonls' }
+local capabilities_servers = { 'cssls', 'emmet_ls', 'html', 'jsonls' }
 
 for _, server in ipairs(servers) do
     nvim_lsp[server].setup {
@@ -465,25 +506,6 @@ for _, server in ipairs(servers) do
         }
     }
 end
-
--- Emmet (https://github.com/aca/emmet-ls)
-
-local configs = require'lspconfig/configs'    
-
-if not nvim_lsp.emmet_ls then    
-  configs.emmet_ls = {    
-    default_config = {    
-      cmd = {'emmet-ls', '--stdio'};
-      filetypes = {'html', 'css', 'scss', 'jsx', 'tsx'};
-      root_dir = function(fname)    
-        return vim.loop.cwd()
-      end;    
-      settings = {};    
-    };    
-  }    
-end    
-
-nvim_lsp.emmet_ls.setup{ capabilities = capabilities; }
 
 -- Lua
 
@@ -537,8 +559,113 @@ nvim_lsp.sumneko_lua.setup {
   },
 }
 
+------------
+-- Formatter
+------------
+
+-- Prettier function for formatter
+local prettier = function()
+  return {
+    exe = "prettier",
+    args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--double-quote" },
+    stdin = true,
+  }
+end
+
+require("formatter").setup({
+  logging = false,
+  filetype = {
+    javascript = { prettier },
+    javascriptreact = { prettier },
+    json = { prettier },
+    typescript = { prettier },
+    typepcriptreact = { prettier },
+    html = { prettier },
+    css = { prettier },
+    scss = { prettier },
+    markdown = { prettier },
+    lua = {
+      -- Stylua
+      function()
+        return {
+          exe = "stylua",
+          args = { "--indent-width", 2, "--indent-type", "Spaces" },
+          stdin = false,
+        }
+      end,
+    },
+  },
+})
+
+-- Runs Formatter on save
+vim.api.nvim_exec(
+  [[
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost *.js,*.jsx,*.json,*.ts,*.tsx,*.css,*.scss,*.md,*.html,*.lua : FormatWrite
+augroup END
+]],
+  true
+)
+
 EOF
 
+" Autocomplete
+" Using nvim-cmp: https://github.com/hrsh7th/nvim-cmp/
+" and this config: https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
+lua <<EOF
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
+
+  local check_back_space = function()
+    local col = vim.fn.col '.' - 1
+    return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s' ~= nil
+  end
+
+  cmp.setup {
+    -- snippet = {
+    --   expand = function(args)
+    --     require('luasnip').lsp_expand(args.body)
+    --   end,
+    -- },
+    mapping = {
+      ['<C-p>'] = cmp.mapping.select_prev_item(),
+      ['<C-n>'] = cmp.mapping.select_next_item(),
+      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.close(),
+      ['<CR>'] = cmp.mapping.confirm {
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
+      },
+      ['<Tab>'] = function(core, fallback)
+        if vim.fn.pumvisible() == 1 then
+          vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
+        -- elseif luasnip.expand_or_jumpable() then
+        --   vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
+        elseif not check_back_space() then
+          cmp.mapping.complete()(core, fallback)
+        else
+          vim.cmd(':>')
+        end
+      end,
+      ['<S-Tab>'] = function(fallback)
+        if vim.fn.pumvisible() == 1 then
+          vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
+        -- elseif luasnip.jumpable(-1) then
+        --   vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
+        else
+          vim.cmd(':<')
+        end
+      end,
+    },
+    sources = {
+      { name = 'nvim_lsp' },
+      -- { name = 'luasnip' },
+    },
+  }
+EOF
 
 "-------------------
 " Treesitter modules
