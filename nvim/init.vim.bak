@@ -381,7 +381,7 @@ nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 
 " Lualine
-lua << EOF
+lua <<EOF
 require'lualine'.setup {
   options = {
     theme = 'nightfly',
@@ -398,7 +398,7 @@ EOF
 " ----------------
 "
 
-lua << EOF
+lua <<EOF
 local nvim_lsp = require('lspconfig')
 
 --Enable (broadcasting) snippet capability for completion. Used by several LSs.
@@ -433,7 +433,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
 end
@@ -558,7 +558,9 @@ nvim_lsp.sumneko_lua.setup {
     },
   },
 }
+EOF
 
+lua <<EOF
 ------------
 -- Formatter
 ------------
@@ -567,7 +569,15 @@ nvim_lsp.sumneko_lua.setup {
 local prettier = function()
   return {
     exe = "prettier",
-    args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--double-quote" },
+    args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+    stdin = true,
+  }
+end
+
+local stylelint = function()
+  return {
+    exe = "stylelint",
+    args = {  "--fix", "--stdin-filename", vim.api.nvim_buf_get_name(0) },
     stdin = true,
   }
 end
@@ -577,13 +587,10 @@ require("formatter").setup({
   filetype = {
     javascript = { prettier },
     javascriptreact = { prettier },
-    json = { prettier },
     typescript = { prettier },
-    typepcriptreact = { prettier },
-    html = { prettier },
-    css = { prettier },
-    scss = { prettier },
-    markdown = { prettier },
+    typescriptreact = { prettier },
+    css = { stylelint },
+    scss = { stylelint },
     lua = {
       -- Stylua
       function()
@@ -602,12 +609,11 @@ vim.api.nvim_exec(
   [[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.js,*.jsx,*.json,*.ts,*.tsx,*.css,*.scss,*.md,*.html,*.lua : FormatWrite
+  autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.lua : FormatWrite
 augroup END
 ]],
   true
 )
-
 EOF
 
 " Autocomplete
@@ -671,7 +677,7 @@ EOF
 " Treesitter modules
 " From: https://github.com/nvim-treesitter/nvim-treesitter#available-modules
 
-lua << EOF
+lua <<EOF
 require'nvim-treesitter.configs'.setup {
     ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
         

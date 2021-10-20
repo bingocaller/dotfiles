@@ -69,11 +69,14 @@ nmap k gk
 " Y yanks to end of line instead of the entire line
 nmap Y y$
 
+" Remove highlight, e.g. after search
+nmap <Esc> :nohlsearch<cr>
+
 " Save from insert mode
 imap <C-s> <esc>:w<cr>
 
 " Expand Emmet abbreviation
-imap <S-tab> <plug>(emmet-expand-abbr)
+" imap <S-tab> <plug>(emmet-expand-abbr)
 
 " ------------------
 " Leader mappings (disable in VSCod(e|ium)
@@ -87,8 +90,6 @@ nmap <leader>vr :sp $MYVIMRC<cr>
 nmap <leader>so :source $MYVIMRC<cr>
 " Install Plugins
 nmap <leader>pi :PlugInstall<cr>
-" Remove highlight, e.g. after search
-nmap <leader>hh :nohlsearch<cr>
 " Update tag (via Emmet)
 nmap <leader>u <plug>(emmet-update-tag)
 " Switch between the last two files
