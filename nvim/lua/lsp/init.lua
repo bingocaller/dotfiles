@@ -11,7 +11,7 @@ local lsp = vim.lsp
 lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
   underline = true,
   signs = true,
-  virtual_text = false,
+  virtual_text = true,
 })
 
 local popup_opts = { border = "single", focusable = false }

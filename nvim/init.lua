@@ -98,9 +98,9 @@ u.nmap("<Esc>", ":nohlsearch<cr>")
 -- Save from insert mode
 u.imap("<C-s>", "<esc>:w<cr>")
 
----------------------
--- Leader mappings (disable in VSCod(e|ium)
----------------------
+------------------
+-- Leader mappings
+------------------
 
 -- <leader> = <Space>
 vim.g.mapleader = " "
@@ -110,9 +110,9 @@ u.nmap("<leader>vr", ":sp $MYVIMRC<cr>")
 -- Source (reload) .vimrc
 u.nmap("<leader>so", ":source $MYVIMRC<cr>")
 -- Install Plugins
-u.nmap("<leader>pi", ":PlugInstall<cr>")
+u.nmap("<leader>pi", ":PackerInstall<cr>")
 -- Update tag (via Emmet)
-u.nmap("<leader>u", "<plug>(emmet-update-tag)")
+-- u.nmap("<leader>u", "<plug>(emmet-update-tag)")
 -- Switch between the last two buffers
 u.nmap("<leader><leader>", "<C-^>", { noremap = true })
 

@@ -94,7 +94,8 @@ return require("packer").startup(function(use)
   use({ "JoosepAlviste/nvim-ts-context-commentstring", ft = { "typescript", "typescriptreact" } }) -- makes jsx comments actually work
 
   -- Visual
-  use_with_config("haishanh/night-owl.vim", "colours") -- colortheme
+  -- use_with_config("haishanh/night-owl.vim", "colours") -- colortheme
+  use_with_config("folke/tokyonight.nvim", "colours") -- colortheme
   use_with_config("hoob3rt/lualine.nvim", "lualine") -- status line
   use_with_config("lukas-reineke/indent-blankline.nvim", "indent-blankline") -- show indentation guides
 

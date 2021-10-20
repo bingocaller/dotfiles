@@ -57,7 +57,8 @@ vim.g.telescope = {
   end,
 }
 
-u.lua_command("Files", "vim.g.telescope.find_files()")
+-- u.lua_command("Files", "vim.g.telescope.find_files()")
+u.command("Files", "Telescope find_files")
 u.command("Rg", "Telescope live_grep")
 u.command("BLines", "Telescope current_buffer_fuzzy_find")
 u.command("History", "Telescope oldfiles")

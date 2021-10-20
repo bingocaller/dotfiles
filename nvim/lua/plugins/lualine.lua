@@ -1,6 +1,7 @@
 require("lualine").setup({
   options = {
-    theme = "nightfly",
+    -- theme = "nightfly",
+    theme = 'tokyonight',
     component_separators = { "|", "|" },
     section_separators = { "", "" },
     disabled_filetypes = {},
