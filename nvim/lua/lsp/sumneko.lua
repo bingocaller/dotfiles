@@ -13,7 +13,7 @@ else
 end
 
 -- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
-local root = vim.fn.getenv("HOME") .. "/git/lua-language-server/"
+local root = vim.fn.getenv("HOME") .. "/dev/lua-language-server/"
 local binary = root .. "bin/" .. system_name .. "/lua-language-server"
 
 local runtime_path = vim.split(package.path, ";")
@@ -36,14 +36,8 @@ local settings = {
       enable = true,
       -- Get the language server to recognize the given globals
       globals = {
-        "global",
+        "hs", -- hammerspoon
         "vim",
-        "use",
-        "describe",
-        "it",
-        "assert",
-        "before_each",
-        "after_each",
       },
     },
     -- Do not send telemetry data containing a randomized but unique identifier

@@ -1,11 +1,12 @@
 local lspconfig = require("lspconfig")
+local configs = require("lspconfig/configs")
 
 local M = {}
 
 M.setup = function(on_attach, capabilities)
   -- Emmet (https://github.com/aca/emmet-ls)
   if not lspconfig.emmet_ls then
-    require("lspconfig/configs").emmet_ls = {
+    configs.emmet_ls = {
       default_config = {
         cmd = { "emmet-ls", "--stdio" },
         filetypes = { "html", "css", "scss", "jsx", "tsx" },

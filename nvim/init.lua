@@ -105,21 +105,18 @@ u.imap("<C-s>", "<esc>:w<cr>")
 -- <leader> = <Space>
 vim.g.mapleader = " "
 
--- Split edit .vimrc
+-- Split edit init.lua
 u.nmap("<leader>vr", ":sp $MYVIMRC<cr>")
--- Source (reload) .vimrc
-u.nmap("<leader>so", ":source $MYVIMRC<cr>")
--- Install Plugins
+-- Source (reload) init.lua
+u.nmap("<leader>so", ":luafile $MYVIMRC<cr>")
+-- u.nmap("<leader>so", ":source $MYVIMRC<cr>")
+
+-- Packer (plugin) commands
+u.nmap("<leader>pc", ":PackerCompile<cr>")
 u.nmap("<leader>pi", ":PackerInstall<cr>")
--- Update tag (via Emmet)
--- u.nmap("<leader>u", "<plug>(emmet-update-tag)")
+
 -- Switch between the last two buffers
 u.nmap("<leader><leader>", "<C-^>", { noremap = true })
-
--- Search for word under cursor within project.
-u.nmap("<C-f>", ":Rg <C-R><C-W><cr>", { noremap = true })
--- Search for selected text withing project using f(ind) register
-u.vmap("<C-f>", '"fy:Rg <C-R>f<C-W><cr>', { noremap = true })
 
 -- -- Autocommands
 -- -- Bind `q` to close the buffer for help files

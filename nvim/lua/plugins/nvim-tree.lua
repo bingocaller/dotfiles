@@ -1,16 +1,19 @@
+local nvim_tree = require("nvim-tree")
 local u = require("utils")
 
 -- Necessary to initialise nvim-tree
 -- following options are the default
-require("nvim-tree").setup({
+nvim_tree.setup({
   -- open the tree when running this setup function
-  open_on_setup = true,
+  -- open_on_setup = true,
   -- show lsp diagnostics in the signcolumn
-  -- lsp_diagnostics = true,
+  diagnostics = {
+    enable = true,
+  },
   -- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
   view = {
     -- width of the window, can be either a number (columns) or a string in `%`
-    width = 40,
+    width = "30%",
     -- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
     side = "right",
     -- if true the tree will resize itself after opening a file

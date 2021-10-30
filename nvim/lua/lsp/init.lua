@@ -1,10 +1,10 @@
 local lspconfig = require("lspconfig")
 
 local u = require("utils")
+
 local emmet_ls = require("lsp.emmet_ls")
+local jsonls = require("lsp.jsonls")
 local sumneko = require("lsp.sumneko")
--- local null_ls = require("lsp.null-ls")
-local tsserver = require("lsp.tsserver")
 
 local lsp = vim.lsp
 
@@ -26,6 +26,10 @@ vim.g.lsp = {
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  -- Disable automatic formatting for servers that have Formatter set up
+  if client.config.flags then
+    client.config.flags.allow_incremental_sync = true
+  end
   -- commands
   u.lua_command("LspFormatting", "vim.lsp.buf.formatting()")
   u.lua_command("LspHover", "vim.lsp.buf.hover()")
@@ -50,14 +54,10 @@ local on_attach = function(client, bufnr)
   u.buf_map("n", "gd", ":LspDef<CR>", nil, bufnr)
   u.buf_map("n", "ga", ":LspAct<CR>", nil, bufnr)
 
-  if client.resolved_capabilities.document_formatting then
-    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-  end
-
   require("illuminate").on_attach(client)
 end
 
---Enable (broadcasting) snippet capability for completion. Used by several LSs.
+--Enable (broadcasting) snippet capability for completion.
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
@@ -71,14 +71,13 @@ local servers = {
   -- 'denols',
   "cssls",
   "dockerls",
-  "emmet_ls",
   "html",
-  "jsonls",
   "pyright",
   "rust_analyzer",
   "sqlls",
   "stylelint_lsp",
   "svelte",
+  "tsserver",
   "vimls",
   "yamlls",
   "zk",
@@ -93,7 +92,8 @@ for _, server in ipairs(servers) do
   })
 end
 
+-- More elaborate configuartions below
+
 emmet_ls.setup(on_attach, capabilities)
-tsserver.setup(on_attach, capabilities)
+jsonls.setup(on_attach, capabilities)
 sumneko.setup(on_attach, capabilities)
--- null_ls.setup(on_attach)

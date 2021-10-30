@@ -8,9 +8,9 @@ return require("packer").startup(function(use)
     return string.format("require('plugins.%s')", name)
   end
 
-  local use_with_config = function(path, name)
-    use({ path, config = config(name) })
-  end
+  -- local use_with_config = function(path, name)
+  --   use({ path, config = config(name) })
+  -- end
 
   -- Utilities & niceness
   use("airblade/vim-gitgutter")
@@ -41,7 +41,7 @@ return require("packer").startup(function(use)
   -- use_with_config("tversteeg/registers.nvim", "registers") -- shows register contents intelligently
 
   -- Code completion
-  use_with_config("hrsh7th/vim-vsnip", "vsnip") -- snippets
+  use({ "hrsh7th/vim-vsnip", config = config("vsnip") }) -- snippets
   use({
     "hrsh7th/nvim-cmp", -- completion
     requires = {
@@ -64,24 +64,33 @@ return require("packer").startup(function(use)
   use({
     "kyazdani42/nvim-tree.lua",
     config = config("nvim-tree"),
-    requires = { {
-      "kyazdani42/nvim-web-devicons",
-    } },
+    requires = { "kyazdani42/nvim-web-devicons" },
   })
   -- use_with_config("mcchrish/nnn.vim", "nnn") -- simple nnn integration
   use({
     "nvim-telescope/telescope.nvim",
     config = config("telescope"),
-    requires = { {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      run = "make",
-    } },
+    requires = {
+      {
+        "nvim-treesitter/nvim-treesitter",
+      },
+      {
+        "nvim-lua/plenary.nvim",
+      },
+      {
+        "kyazdani42/nvim-web-devicons",
+      },
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        run = "make",
+      },
+    },
   })
 
   -- LSP
   use("neovim/nvim-lspconfig") -- makes LSP configuration easier
   use("jose-elias-alvarez/nvim-lsp-ts-utils") -- utilities to improve TypeScript DX
-  use_with_config("RRethy/vim-illuminate", "illuminate") -- highlights and allows moving between variable references
+  use({ "RRethy/vim-illuminate", config = config("illuminate") }) -- highlights and allows moving between variable references
   -- use("~/git/null-ls.nvim") -- allows using neovim as language server
 
   -- Treesitter
@@ -93,11 +102,21 @@ return require("packer").startup(function(use)
   use({ "windwp/nvim-ts-autotag", ft = { "typescript", "typescriptreact" } }) -- automatically close jsx tags
   use({ "JoosepAlviste/nvim-ts-context-commentstring", ft = { "typescript", "typescriptreact" } }) -- makes jsx comments actually work
 
+  -- Schemastore (set up is in ../lsp/jsonls.lua)
+  use("b0o/schemastore.nvim")
+
+  -- Formatting
+  use({ "mhartington/formatter.nvim", config = config("formatter") })
+
   -- Visual
-  -- use_with_config("haishanh/night-owl.vim", "colours") -- colortheme
-  use_with_config("folke/tokyonight.nvim", "colours") -- colortheme
-  use_with_config("hoob3rt/lualine.nvim", "lualine") -- status line
-  use_with_config("lukas-reineke/indent-blankline.nvim", "indent-blankline") -- show indentation guides
+  use({ "folke/tokyonight.nvim", config = config("colours") }) -- colortheme
+  -- use({ "EdenEast/nightfox.nvim", config = config("colours") }) -- colortheme
+  use({
+    "nvim-lualine/lualine.nvim", -- status line
+    requires = { "kyazdani42/nvim-web-devicons" },
+    config = config("lualine"),
+  })
+  use({ "lukas-reineke/indent-blankline.nvim", config = config("indent-blankline") }) -- show indentation guides
 
   -- Misc
   use("dag/vim-fish") -- fish support

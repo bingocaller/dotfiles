@@ -1,10 +1,27 @@
-require("lualine").setup({
+local lualine = require("lualine")
+
+lualine.setup({
   options = {
-    -- theme = "nightfly",
-    theme = 'tokyonight',
-    component_separators = { "|", "|" },
-    section_separators = { "", "" },
-    disabled_filetypes = {},
+    theme = "auto",
+    component_separators = "│",
+    section_separators = "",
+  },
+  sections = {
+    lualine_b = {
+      {
+        "branch",
+        icon = "",
+      },
+      "diff",
+      {
+        "diagnostics",
+        sources = { "nvim_lsp" },
+      },
+    },
+    lualine_z = {
+      "location",
+      "os.date('%H:%M')",
+    },
   },
   extensions = { "nvim-tree" },
 })
