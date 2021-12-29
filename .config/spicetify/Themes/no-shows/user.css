@@ -1,0 +1,28 @@
+/* -------------------
+Hide unwanted elements
+-------------------- */
+
+/* Your Episodes menu item */
+.main-navBar-entryPoints .GlueDropTarget--episodes, 
+/* "Good morning/afternoon" thing that no one ever uses. */
+.main-home-content > *:first-child, 
+/* Podcast-related shelves */
+[aria-label='Episodes for you'], 
+[aria-label='Shows you might like'],
+[aria-label^='Popular with listeners of '],
+/* Danish crap */
+[aria-label='De største sange lige nu'] {
+  display: none;
+}
+
+/* ----------
+Tweak styles
+---------- */
+
+/*
+* Prevent the first menu item and the macOS
+* Close, Minimize, Maximize buttons from overlapping.
+*/
+.main-navBar-navBar {
+  padding-block-start: 2.25rem;
+}

@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/Users/bingocaller/work/product-publisher-suite/frontend'
+let g:netrw_dirhist_9='/Users/bingocaller/work/product-publisher-suite/frontend/publisher-workflow'
+let g:netrw_dirhist_8='/Users/bingocaller/work/product-publisher-suite/frontend/publisher-workflow/src'
+let g:netrw_dirhist_7='/Users/bingocaller/work/product-publisher-suite/frontend/publisher-workflow/src/server'
+let g:netrw_dirhist_6='/Users/bingocaller/work/product-publisher-suite/frontend/publisher-workflow'
+let g:netrw_dirhist_5='/Users/bingocaller/work/product-publisher-suite/frontend/publisher-workflow/src/universal/pages/Workspace/Create/File/components/FileSelector/stories'
+let g:netrw_dirhist_4='/Users/bingocaller/work/product-publisher-suite/frontend/publisher-workflow'
+let g:netrw_dirhist_3='/Users/bingocaller/work/product-publisher-suite'
+let g:netrw_dirhist_2='/Users/bingocaller/work/utopia-demos/src/scss'
+let g:netrw_dirhist_1='/Users/bingocaller/work/utopia-demos'
