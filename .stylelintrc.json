@@ -1,0 +1,29 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-idiomatic-order"],
+  "rules": {
+    "order/properties-alphabetical-order": null,
+    "selector-class-pattern": "^[a-z]+(-[a-z]+)*(__[a-z]+(-[a-z]+)*)?(--[a-z]+(-[a-z]+)*)?$"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.(s)?css"],
+      "customSyntax": "postcss-scss",
+      "extends": ["stylelint-config-sass-guidelines"],
+      "plugins": ["stylelint-scss"],
+      "rules": {
+        "scss/at-rule-no-unknown": true,
+        "scss/percent-placeholder-pattern": "^[a-z]+(-[a-z]+)*(__[a-z]+(-[a-z]+)*)?(--[a-z]+(-[a-z]+)*)?$",
+        "scss/selector-no-union-class-name": true
+      }
+    },
+    {
+      "files": ["**/*.(j|t)sx"],
+      "customSyntax": "postcss-jsx",
+      "extends": ["stylelint-config-styled-components"],
+      "rules": {
+        "indentation": null,
+        "value-keyword-case": null
+      }
+    }
+  ]
+}
