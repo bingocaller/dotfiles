@@ -2,3 +2,6 @@
 
 vim/.vim/.netrwhist
 vim/.vim/plugged
+
+.config/spicetify/Backup
+.config/spicetify/Extracted
