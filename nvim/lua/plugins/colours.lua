@@ -18,6 +18,9 @@
 -- Tokyo Night settings
 vim.g.tokyonight_style = "night"
 vim.g.tokyonight_italic_functions = true
+vim.g.tokyonight_dark_sidebar = false
+vim.g.tokyonight_dark_float = false
+
 vim.api.nvim_command("colorscheme tokyonight")
 
 -- set Vim-specific sequences for RGB colors

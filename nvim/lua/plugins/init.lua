@@ -12,18 +12,43 @@ return require("packer").startup(function(use)
   --   use({ path, config = config(name) })
   -- end
 
-  -- Utilities & niceness
-  use("airblade/vim-gitgutter")
-  use("christoomey/vim-sort-motion")
-  -- use("inkarkat/vim-ReplaceWithRegister")
-  -- use("machakann/vim-highlightedyank")
-  use("tommcdo/vim-exchange")
-  use("tpope/vim-abolish") -- Abbreviation, Substitustion, Coercion
-  use("tpope/vim-commentary")
-  use("tpope/vim-repeat")
-  use("tpope/vim-sleuth") -- Adjust indentation automatically
-  use("tpope/vim-surround")
-  use("tpope/vim-unimpaired") -- Lots of mappings
+  -- LSP
+  use("neovim/nvim-lspconfig") -- makes LSP configuration easier
+  use("jose-elias-alvarez/nvim-lsp-ts-utils") -- utilities to improve TypeScript DX
+  use({ "RRethy/vim-illuminate", config = config("illuminate") }) -- highlights and allows moving between variable references
+  -- use("~/git/null-ls.nvim") -- allows using neovim as language server
+
+  -- Formatting
+  use({ "mhartington/formatter.nvim", config = config("formatter") })
+
+  -- Treesitter
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    config = config("treesitter"),
+  })
+  use({ "windwp/nvim-ts-autotag", ft = { "typescript", "typescriptreact" } }) -- automatically close jsx tags
+  use({ "JoosepAlviste/nvim-ts-context-commentstring", ft = { "typescript", "typescriptreact" } }) -- makes jsx comments actually work
+
+  -- Code completion
+  use({
+    "hrsh7th/nvim-cmp", -- completion
+    requires = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "saadparwaiz1/cmp_luasnip",
+      -- Snippets
+      "L3MON4D3/LuaSnip", --snippet engine
+      "rafamadriz/friendly-snippets", -- a bunch of snippets to use
+    },
+    config = config("cmp"),
+  })
+
+  -- Schemastore (set up is in ../lsp/jsonls.lua)
+  use("b0o/schemastore.nvim")
 
   -- Custom text objects
   use("wellle/targets.vim") -- many useful additional text objects
@@ -39,25 +64,6 @@ return require("packer").startup(function(use)
   -- use_with_config("svermeulen/vim-cutlass", "cutlass") -- separates cut and delete operations
   -- use_with_config("svermeulen/vim-yoink", "yoink") -- improves paste
   -- use_with_config("tversteeg/registers.nvim", "registers") -- shows register contents intelligently
-
-  -- Code completion
-  use({ "hrsh7th/vim-vsnip", config = config("vsnip") }) -- snippets
-  use({
-    "hrsh7th/nvim-cmp", -- completion
-    requires = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-vsnip",
-      "hrsh7th/cmp-path",
-    },
-    config = config("cmp"),
-  })
-  -- use({
-  --   "windwp/nvim-autopairs", -- autocomplete pairs
-  --   config = config("autopairs"),
-  --   wants = "nvim-cmp",
-  -- })
 
   -- Integrations
   -- File explorer
@@ -87,27 +93,6 @@ return require("packer").startup(function(use)
     },
   })
 
-  -- LSP
-  use("neovim/nvim-lspconfig") -- makes LSP configuration easier
-  use("jose-elias-alvarez/nvim-lsp-ts-utils") -- utilities to improve TypeScript DX
-  use({ "RRethy/vim-illuminate", config = config("illuminate") }) -- highlights and allows moving between variable references
-  -- use("~/git/null-ls.nvim") -- allows using neovim as language server
-
-  -- Treesitter
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-    config = config("treesitter"),
-  })
-  use({ "windwp/nvim-ts-autotag", ft = { "typescript", "typescriptreact" } }) -- automatically close jsx tags
-  use({ "JoosepAlviste/nvim-ts-context-commentstring", ft = { "typescript", "typescriptreact" } }) -- makes jsx comments actually work
-
-  -- Schemastore (set up is in ../lsp/jsonls.lua)
-  use("b0o/schemastore.nvim")
-
-  -- Formatting
-  use({ "mhartington/formatter.nvim", config = config("formatter") })
-
   -- Visual
   use({ "folke/tokyonight.nvim", config = config("colours") }) -- colortheme
   -- use({ "EdenEast/nightfox.nvim", config = config("colours") }) -- colortheme
@@ -117,6 +102,19 @@ return require("packer").startup(function(use)
     config = config("lualine"),
   })
   use({ "lukas-reineke/indent-blankline.nvim", config = config("indent-blankline") }) -- show indentation guides
+
+  -- Utilities & niceness
+  use("airblade/vim-gitgutter")
+  use("christoomey/vim-sort-motion")
+  use({ "rrethy/vim-hexokinase", run = "make hexokinase" }) -- show colours in code
+  use("tommcdo/vim-exchange")
+  use("tpope/vim-abolish") -- Abbreviation, Substitustion, Coercion
+  use("tpope/vim-commentary")
+  use("tpope/vim-repeat")
+  use("tpope/vim-sleuth") -- Adjust indentation automatically
+  use("tpope/vim-surround")
+  use("tpope/vim-unimpaired") -- Lots of mappings
+  -- use({ "rmagatti/auto-session", config = config("auto-session") })
 
   -- Misc
   use("dag/vim-fish") -- fish support

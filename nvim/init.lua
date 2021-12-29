@@ -120,44 +120,20 @@ u.nmap("<leader><leader>", "<C-^>", { noremap = true })
 
 -- -- Autocommands
 -- -- Bind `q` to close the buffer for help files
--- vim.cmd([[
---   augroup help
---     autocmd!
---     Filetype help nnoremap <buffer> q :q<CR>
---   augroup end
--- ]])
--- -- Force Vim to rescan entire buffer when highlighting large JSX/TSX files.
--- -- Disable when leaving.
--- vim.cmd([[
---   augroup jsx_tsx
---     autocmd!
---     BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
---     BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
---   augroup end
--- ]])
+vim.api.nvim_command("autocmd Filetype help nnoremap <buffer> q :q<CR>")
 -- -- Enable wrapping in Markdown files, disable when leaving
--- vim.cmd([[
---   augroup markdown_wrap
---     autocmd!
---     BufEnter,BufNewFile,BufRead *.{md,mdx} :set wrap
---     BufLeave *.{md,mdx} :set nowrap
---   augroup end
--- ]])
--- -- Force Nunjucks files to register as such
--- -- May not be necessary with Treesitter
--- vim.cmd([[
---   augroup markdown_wrap
---     autocmd!
---     BufEnter,BufNewFile,BufRead *.{njk,nunjucks,jinja} :set filetype=jinja.html
---   augroup end
--- ]])
+vim.api.nvim_command("autocmd BufEnter *.{md,mdx} setlocal wrap")
+vim.api.nvim_command("autocmd BufLeave *.{md,mdx} setlocal nowrap")
+-- Enable spell checking in git commits and Markdown files
+vim.api.nvim_command("autocmd BufEnter gitcommit,*.{md,mdx} setlocal spell")
+vim.api.nvim_command("autocmd BufLeave gitcommit,*.{md,mdx} setlocal nospell")
 
 -- Automatically regenerate compiled loader file for Packer,
 -- when plugins.lua changes
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    autocmd BufWritePost ~/.config/nvim/lua/plugins/init.lua source <afile> | PackerCompile
   augroup end
 ]])
 

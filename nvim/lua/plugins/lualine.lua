@@ -15,7 +15,7 @@ lualine.setup({
       "diff",
       {
         "diagnostics",
-        sources = { "nvim_lsp" },
+        sources = { "nvim_diagnostic" },
       },
     },
     lualine_z = {

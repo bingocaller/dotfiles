@@ -19,7 +19,11 @@ formatter.setup({
       function()
         return {
           exe = "stylelint_d", -- Runs stylelint in a daemon for speed
-          args = { "--fix", "--stdin-filename", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)) },
+          args = {
+            "--fix",
+            "--stdin-filename",
+            vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+          },
           stdin = true,
         }
       end,

@@ -1,27 +1,35 @@
+-- https://github.com/pedro757/emmet
+
 local lspconfig = require("lspconfig")
-local configs = require("lspconfig/configs")
 
 local M = {}
 
 M.setup = function(on_attach, capabilities)
-  -- Emmet (https://github.com/aca/emmet-ls)
-  if not lspconfig.emmet_ls then
-    configs.emmet_ls = {
-      default_config = {
-        cmd = { "emmet-ls", "--stdio" },
-        filetypes = { "html", "css", "scss", "jsx", "tsx" },
-        root_dir = function()
-          return vim.loop.cwd()
-        end,
-        settings = {},
-      },
-      flags = {
-        debounce_text_changes = 150,
-      },
-      capabilities = capabilities,
-      on_attach = on_attach,
-    }
-  end
+  lspconfig.emmet_ls.setup({
+    capabilities = capabilities,
+    cmd = { "ls_emmet", "--stdio" },
+    filetypes = {
+      "css",
+      "haml",
+      "html",
+      "javascriptreact",
+      "less",
+      "pug",
+      "sass",
+      "scss",
+      "slim",
+      "sss",
+      "stylus",
+      "typescriptreact",
+      "xml",
+      "xsl",
+    },
+    on_attach = on_attach,
+    root_dir = function()
+      return vim.loop.cwd()
+    end,
+    settings = {},
+  })
 end
 
 return M

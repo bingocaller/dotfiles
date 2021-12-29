@@ -42,6 +42,7 @@ local on_attach = function(client, bufnr)
 
   -- bindings
   u.buf_map("n", "<leader>rn", ":LspRename<CR>", nil, bufnr)
+  u.buf_map("n", "<leader>rs", ":LspRestart<CR>", nil, bufnr)
   u.buf_map("n", "gy", ":LspTypeDef<CR>", nil, bufnr)
   u.buf_map("n", "K", ":LspHover<CR>", nil, bufnr)
   u.buf_map("n", "[a", ":LspDiagPrev<CR>", nil, bufnr)
@@ -53,6 +54,7 @@ local on_attach = function(client, bufnr)
   u.buf_map("n", "gr", ":LspRef<CR>", nil, bufnr)
   u.buf_map("n", "gd", ":LspDef<CR>", nil, bufnr)
   u.buf_map("n", "ga", ":LspAct<CR>", nil, bufnr)
+  u.buf_map("v", "ga", "<Esc><cmd> LspRangeAct<CR>", nil, bufnr)
 
   require("illuminate").on_attach(client)
 end

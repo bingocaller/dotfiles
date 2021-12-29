@@ -31,6 +31,7 @@ require("nvim-treesitter.configs").setup({
   indent = { enable = true },
   highlight = {
     enable = true, -- false will disable the whole extension
+    use_languagetree = true,
 
     -- custom_captures = {
     --     -- Highlight the @foo.bar capture group with the "Identifier" highlight group.

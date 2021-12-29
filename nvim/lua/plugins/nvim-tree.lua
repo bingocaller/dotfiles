@@ -1,9 +1,13 @@
+vim.g.nvim_tree_quit_on_open = 1 -- 0 by default, closes the tree when you open a file
+vim.g.nvim_tree_highlight_opened_files = 1 -- 0 by default, will enable folder and file icon highlight for opened files/directories.
+
 local nvim_tree = require("nvim-tree")
 local u = require("utils")
 
 -- Necessary to initialise nvim-tree
 -- following options are the default
 nvim_tree.setup({
+  hijack_cursor = false,
   -- open the tree when running this setup function
   -- open_on_setup = true,
   -- show lsp diagnostics in the signcolumn
@@ -20,10 +24,6 @@ nvim_tree.setup({
     auto_resize = false,
   },
 })
-
-vim.g.nvim_tree_gitignore = 1 -- 0 by default
-vim.g.nvim_tree_quit_on_open = 1 -- 0 by default, closes the tree when you open a file
-vim.g.nvim_tree_highlight_opened_files = 1 -- 0 by default, will enable folder and file icon highlight for opened files/directories.
 
 u.nmap("<C-n>", ":NvimTreeToggle<CR>", { noremap = true })
 u.nmap("<leader>r", ":NvimTreeRefresh<CR>", { noremap = true })
