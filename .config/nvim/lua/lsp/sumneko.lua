@@ -37,6 +37,7 @@ local settings = {
       -- Get the language server to recognize the given globals
       globals = {
         "hs", -- hammerspoon
+        "spoon",
         "vim",
       },
     },
