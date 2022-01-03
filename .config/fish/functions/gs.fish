@@ -1,5 +1,3 @@
-__breeze_variables
-
 function __set_variables
     set arr
     set -g staged
@@ -8,17 +6,14 @@ function __set_variables
     set -g ignored
     set -g unmerged
     set -g current_color
-
-    set -g hash "#"
-    set -g colon ":"
 end
 
 function __sanitize_flags -d "only allow for predefined flags"
-    set whitelist "--ignored" "--renames" "--no-renames"
+    set allow_list "--ignored" "--renames" "--no-renames"
     set sanitized
 
     for flag in (string split " " -- $argv)
-        if contains -- $flag $whitelist
+        if contains -- $flag $allow_list
             set sanitized $sanitized $flag
         end
     end
@@ -109,47 +104,35 @@ function __handle_renames_and_copies -a idx name -d "removes explict rename or c
     echo $name
 end
 
-function __print_branch -d "print the branch information"
-    printf (set_color black)"$hash "(set_color normal)"On branch: "(set_color --bold white)(git branch --show-current)(set_color normal)\n(set_color black)"$hash\n"
-end
-
 function __print_state -a message length -d "print the state message"
     if test $length -gt 0
-        set arrow "➤"
-        printf (set_color black)"$hash"\n(set_color normal)"$arrow $message$colon"\n(set_color black)"$hash\n"
+        set arrow "›"
+        printf \n(set_color normal)"$arrow $message:"\n
     end
 end
 
-function __format_status -a message name -d "foramt the output of the status"
-    echo (printf "%s %15s$colon %s %s" (set_color $current_color)$hash $message (set_color normal)"/idx/" (set_color $current_color)$name)
-end
-
-function __print_status -a st i padding -d "prints the status"
-    set arr $arr (echo (echo $st | string split "/idx/")[2] | string trim | string replace -r -a '\e\[[^m]*m' '' | string split " -> ")[-1]
-    printf (string replace "/idx/" (printf "%"$padding"s" [$i]) $st)\n
+function __format_status -a message name -d "format the output of the status"
+    echo (printf "%15s: %s" (set_color $current_color)$message $name)
 end
 
 function __print -d "print output to screen"
     set length (count $staged $unmerged $unstaged $untracked $ignored)
-    set idx_padding (math 2 + (count (string split '' $length )))
     set states staged unmerged unstaged untracked ignored
 
-    __print_branch
-
-    set i 1
+    set i 0
     for state in $states
         __print_state (__parse_state $state) (count $$state)
         for st in $$state
-            __print_status $st $i $idx_padding
-            set i (math $i + 1)
+            printf $st\n
         end
+        set i (math $i + 1)
     end
 
     if test $length -eq 0
-        echo (set_color black)"$hash"(set_color normal)" nothing to commit, working tree clean"
+        echo "Nothing to commit, working tree clean"
     end
 
-    echo (set_color black)"$hash"
+    echo # newline
     set_color normal
 end
 
