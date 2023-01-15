@@ -1,13 +1,16 @@
-PAN-000 Summarise the change
+ID-000
 
-Because:
-- Explain the reasons you made this change
-- Make a new bullet for each reason
-- Each line should be under 72 characters
+**Why:**
+
+Explain the reasons you made this change.
+Make a new bullet for each reason if necessary.
+Each line should be under 72 characters.
+
+**What:**
 
 Explain exactly what was done in this commit with more depth than the 50
 character subject line. Remember to wrap at 72 characters!
 
-Include any additional notes, relevant links, or co-authors.
+---
 
-https://issuu.atlassian.net/browse/PAN-000
+https://issuu.atlassian.net/browse/ID-000

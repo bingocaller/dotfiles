@@ -1,7 +1,11 @@
 .DS_Store
 
+fishd.tmp.*
+
+.config/karabiner/automatic_backups
+
+.config/nvim/spell
+
 vim/.vim/.netrwhist
 vim/.vim/plugged
-
-.config/spicetify/Backup
-.config/spicetify/Extracted
+vim/.vim/undodir
