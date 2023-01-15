@@ -23,12 +23,17 @@ u.tmap("<a-J>", "<c-\\><c-n><c-w>J", { noremap = true })
 u.tmap("<a-K>", "<c-\\><c-n><c-w>K", { noremap = true })
 u.tmap("<a-L>", "<c-\\><c-n><c-w>L", { noremap = true })
 
+-- ----------------
 -- Tab switching
+-- ----------------
+
+-- Alt + [ / ]: cycle between tabs
 u.tmap("<a-]>", "<c-\\><c-n>gt", { noremap = true })
 u.nmap("<a-]>", "gt", { noremap = true })
 u.tmap("<a-[>", "<c-\\><c-n>gT", { noremap = true })
 u.nmap("<a-[>", "gT", { noremap = true })
 
+-- Alt + number: pick tab by number
 u.nmap("<a-1>", "1gt", { noremap = true })
 u.nmap("<a-2>", "2gt", { noremap = true })
 u.nmap("<a-3>", "3gt", { noremap = true })
