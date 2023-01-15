@@ -27,7 +27,7 @@ obj.author = "Roman Khomenko <roman.dowakin@gmail.com>"
 obj.homepage = "https://github.com/Hammerspoon/Spoons"
 obj.license = "MIT - https://opensource.org/licenses/MIT"
 
-obj.defaultState = 'unmute'
+obj.defaultState = "unmute"
 
 obj.state = obj.defaultState
 obj.pushed = false
@@ -38,94 +38,118 @@ obj.pushed = false
 obj.app_switcher = {}
 
 local function showState()
-    local device = hs.audiodevice.defaultInputDevice()
-    local muted = false
-    if obj.state == 'unmute' then
-        obj.menubar:setIcon(hs.spoons.resourcePath("speak.pdf"))
-    elseif obj.state == 'mute' then
-        obj.menubar:setIcon(hs.spoons.resourcePath("muted.pdf"))
-        muted = true
-    elseif obj.state == 'push-to-talk' then
-        if obj.pushed then
-            obj.menubar:setIcon(hs.spoons.resourcePath("record.pdf"), false)
-        else
-            obj.menubar:setIcon(hs.spoons.resourcePath("unrecord.pdf"))
-            muted = true
-        end
-    elseif obj.state == 'release-to-talk' then
-        if obj.pushed then
-            obj.menubar:setIcon(hs.spoons.resourcePath("unrecord.pdf"))
-            muted = true
-        else
-            obj.menubar:setIcon(hs.spoons.resourcePath("record.pdf"), false)
-        end
-    end
+	local device = hs.audiodevice.defaultInputDevice()
+	local muted = false
+	if obj.state == "unmute" then
+		obj.menubar:setIcon(hs.spoons.resourcePath("speak.pdf"))
+	elseif obj.state == "mute" then
+		obj.menubar:setIcon(hs.spoons.resourcePath("muted.pdf"))
+		muted = true
+	elseif obj.state == "push-to-talk" then
+		if obj.pushed then
+			obj.menubar:setIcon(hs.spoons.resourcePath("record.pdf"), false)
+		else
+			obj.menubar:setIcon(hs.spoons.resourcePath("unrecord.pdf"))
+			muted = true
+		end
+	elseif obj.state == "release-to-talk" then
+		if obj.pushed then
+			obj.menubar:setIcon(hs.spoons.resourcePath("unrecord.pdf"))
+			muted = true
+		else
+			obj.menubar:setIcon(hs.spoons.resourcePath("record.pdf"), false)
+		end
+	end
 
-    device:setMuted(muted)
+	device:setMuted(muted)
 end
 
 function obj.setState(s)
-    obj.state = s
-    showState()
+	obj.state = s
+	showState()
 end
 
 obj.menutable = {
-    { title = "UnMuted", fn = function() obj.setState('unmute') end },
-    { title = "Muted", fn = function() obj.setState('mute') end },
-    { title = "Push-to-talk (fn)", fn = function() obj.setState('push-to-talk') end },
-    { title = "Release-to-talk (fn)", fn = function() obj.setState('release-to-talk') end },
+	{
+		title = "UnMuted",
+		fn = function()
+			obj.setState("unmute")
+		end,
+	},
+	{
+		title = "Muted",
+		fn = function()
+			obj.setState("mute")
+		end,
+	},
+	{
+		title = "Push-to-talk (fn)",
+		fn = function()
+			obj.setState("push-to-talk")
+		end,
+	},
+	{
+		title = "Release-to-talk (fn)",
+		fn = function()
+			obj.setState("release-to-talk")
+		end,
+	},
 }
 
-local function appWatcher(appName, eventType, appObject)
-    local new_app_state = obj.app_switcher[appName];
-    if (new_app_state) then
-        if (eventType == hs.application.watcher.launching) then
-            obj.setState(new_app_state)
-        elseif (eventType == hs.application.watcher.terminated) then
-            obj.setState(obj.defaultState)
-        end
-    end
+local function appWatcher(appName, eventType)
+	local new_app_state = obj.app_switcher[appName]
+	if new_app_state then
+		if eventType == hs.application.watcher.launching then
+			obj.setState(new_app_state)
+		elseif eventType == hs.application.watcher.terminated then
+			obj.setState(obj.defaultState)
+		end
+	end
 end
 
 local function eventTapWatcher(event)
-    device = hs.audiodevice.defaultInputDevice()
-    if event:getFlags()['fn'] then
-        obj.pushed = true
-    else
-        obj.pushed = false
-    end
-    showState()
+	if event:getFlags()["fn"] then
+		obj.pushed = true
+	else
+		obj.pushed = false
+	end
+	showState()
 end
 
 --- PushToTalk:init()
 --- Method
 --- Initial setup. It's empty currently
-function obj:init()
-end
+function obj:init() end
 
 --- PushToTalk:init()
 --- Method
 --- Starts menu and key watcher
 function obj:start()
-    self:stop()
-    obj.appWatcher = hs.application.watcher.new(appWatcher)
-    obj.appWatcher:start()
+	self:stop()
+	obj.appWatcher = hs.application.watcher.new(appWatcher)
+	obj.appWatcher:start()
 
-    obj.eventTapWatcher = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, eventTapWatcher)
-    obj.eventTapWatcher:start()
+	obj.eventTapWatcher = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, eventTapWatcher)
+	obj.eventTapWatcher:start()
 
-    obj.menubar = hs.menubar.new()
-    obj.menubar:setMenu(obj.menutable)
-    obj.setState(obj.state)
+	obj.menubar = hs.menubar.new()
+	obj.menubar:setMenu(obj.menutable)
+	obj.setState(obj.state)
 end
 
 --- PushToTalk:stop()
 --- Method
 --- Stops PushToTalk
 function obj:stop()
-    if obj.appWatcher then obj.appWatcher:stop() end
-    if obj.eventTapWatcher then obj.eventTapWatcher:stop() end
-    if obj.menubar then obj.menubar:delete() end
+	if obj.appWatcher then
+		obj.appWatcher:stop()
+	end
+	if obj.eventTapWatcher then
+		obj.eventTapWatcher:stop()
+	end
+	if obj.menubar then
+		obj.menubar:delete()
+	end
 end
 
 --- PushToTalk:toggleStates()
@@ -135,13 +159,13 @@ end
 --- Parameters:
 ---  * states - A array of states to toggle. For example: `{'push-to-talk', 'release-to-talk'}`
 function obj:toggleStates(states)
-    new_state = states[1]
-    for i, v in pairs(states) do
-        if v == obj.state then
-            new_state = states[(i % #states) + 1]
-        end
-    end
-    obj.setState(new_state)
+	local new_state = states[1]
+	for i, v in pairs(states) do
+		if v == obj.state then
+			new_state = states[(i % #states) + 1]
+		end
+	end
+	obj.setState(new_state)
 end
 
 return obj

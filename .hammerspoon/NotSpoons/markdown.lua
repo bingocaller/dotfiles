@@ -1,51 +1,51 @@
 local function wrapSelectedText(wrapCharacters)
-  -- Preserve the current contents of the system clipboard
-  local originalClipboardContents = hs.pasteboard.getContents()
+	-- Preserve the current contents of the system clipboard
+	local originalClipboardContents = hs.pasteboard.getContents()
 
-  -- Copy the currently-selected text to the system clipboard
-  hs.keyUpDown("cmd", "c")
+	-- Copy the currently-selected text to the system clipboard
+	hs.keyUpDown("cmd", "c")
 
-  -- Allow some time for the command+c keystroke to fire asynchronously before
-  -- we try to read from the clipboard
-  hs.timer.doAfter(0.2, function()
-    -- Construct the formatted output and paste it over top of the
-    -- currently-selected text
-    local selectedText = hs.pasteboard.getContents()
-    local wrappedText = wrapCharacters .. selectedText .. wrapCharacters
-    hs.pasteboard.setContents(wrappedText)
-    hs.keyUpDown("cmd", "v")
+	-- Allow some time for the command+c keystroke to fire asynchronously before
+	-- we try to read from the clipboard
+	hs.timer.doAfter(0.2, function()
+		-- Construct the formatted output and paste it over top of the
+		-- currently-selected text
+		local selectedText = hs.pasteboard.getContents()
+		local wrappedText = wrapCharacters .. selectedText .. wrapCharacters
+		hs.pasteboard.setContents(wrappedText)
+		hs.keyUpDown("cmd", "v")
 
-    -- Allow some time for the command+v keystroke to fire asynchronously before
-    -- we restore the original clipboard
-    hs.timer.doAfter(0.2, function()
-      hs.pasteboard.setContents(originalClipboardContents)
-    end)
-  end)
+		-- Allow some time for the command+v keystroke to fire asynchronously before
+		-- we restore the original clipboard
+		hs.timer.doAfter(0.2, function()
+			hs.pasteboard.setContents(originalClipboardContents)
+		end)
+	end)
 end
 
 local function inlineLink()
-  -- Fetch URL from the system clipboard
-  local linkUrl = hs.pasteboard.getContents()
+	-- Fetch URL from the system clipboard
+	local linkUrl = hs.pasteboard.getContents()
 
-  -- Copy the currently-selected text to use as the link text
-  hs.keyUpDown("cmd", "c")
+	-- Copy the currently-selected text to use as the link text
+	hs.keyUpDown("cmd", "c")
 
-  -- Allow some time for the command+c keystroke to fire asynchronously before
-  -- we try to read from the clipboard
-  hs.timer.doAfter(0.2, function()
-    -- Construct the formatted output and paste it over top of the
-    -- currently-selected text
-    local linkText = hs.pasteboard.getContents()
-    local markdown = "[" .. linkText .. "](" .. linkUrl .. ")"
-    hs.pasteboard.setContents(markdown)
-    hs.keyUpDown("cmd", "v")
+	-- Allow some time for the command+c keystroke to fire asynchronously before
+	-- we try to read from the clipboard
+	hs.timer.doAfter(0.2, function()
+		-- Construct the formatted output and paste it over top of the
+		-- currently-selected text
+		local linkText = hs.pasteboard.getContents()
+		local markdown = "[" .. linkText .. "](" .. linkUrl .. ")"
+		hs.pasteboard.setContents(markdown)
+		hs.keyUpDown("cmd", "v")
 
-    -- Allow some time for the command+v keystroke to fire asynchronously before
-    -- we restore the original clipboard
-    hs.timer.doAfter(0.2, function()
-      hs.pasteboard.setContents(originalClipboardContents)
-    end)
-  end)
+		-- Allow some time for the command+v keystroke to fire asynchronously before
+		-- we restore the original clipboard
+		hs.timer.doAfter(0.2, function()
+			hs.pasteboard.setContents(linkUrl)
+		end)
+	end)
 end
 
 --------------------------------------------------------------------------------
@@ -69,44 +69,44 @@ local markdownMode = hs.hotkey.modal.new({}, "F20")
 local message = require("NotSpoons/status-message")
 markdownMode.statusMessage = message.new("Markdown Mode (control-m)")
 markdownMode.entered = function()
-  markdownMode.statusMessage:show()
+	markdownMode.statusMessage:show()
 end
 markdownMode.exited = function()
-  markdownMode.statusMessage:hide()
+	markdownMode.statusMessage:hide()
 end
 
 -- Bind the given key to call the given function and exit Markdown mode
 function markdownMode.bindWithAutomaticExit(mode, key, fn)
-  mode:bind({}, key, function()
-    mode:exit()
-    fn()
-  end)
+	mode:bind({}, key, function()
+		mode:exit()
+		fn()
+	end)
 end
 
 markdownMode:bindWithAutomaticExit("b", function()
-  wrapSelectedText("**")
+	wrapSelectedText("**")
 end)
 
 markdownMode:bindWithAutomaticExit("i", function()
-  wrapSelectedText("*")
+	wrapSelectedText("*")
 end)
 
 markdownMode:bindWithAutomaticExit("s", function()
-  wrapSelectedText("~~")
+	wrapSelectedText("~~")
 end)
 
 markdownMode:bindWithAutomaticExit("l", function()
-  inlineLink()
+	inlineLink()
 end)
 
 markdownMode:bindWithAutomaticExit("c", function()
-  wrapSelectedText("`")
+	wrapSelectedText("`")
 end)
 
 -- Use Control+m to toggle Markdown Mode
 hs.hotkey.bind({ "ctrl" }, "m", function()
-  markdownMode:enter()
+	markdownMode:enter()
 end)
 markdownMode:bind({ "ctrl" }, "m", function()
-  markdownMode:exit()
+	markdownMode:exit()
 end)
