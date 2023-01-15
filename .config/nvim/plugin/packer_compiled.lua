@@ -79,15 +79,19 @@ _G.packer_plugins = {
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["cheatsheet.nvim"] = {
+    after = { "popup.nvim" },
+    commands = { "Cheatsheet" },
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/opt/cheatsheet.nvim",
+    url = "https://github.com/sudormrfbin/cheatsheet.nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
-  },
-  ["cmp-cmdline"] = {
-    loaded = true,
-    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
-    url = "https://github.com/hrsh7th/cmp-cmdline"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
@@ -109,21 +113,6 @@ _G.packer_plugins = {
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
-  ["codi.vim"] = {
-    loaded = true,
-    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/codi.vim",
-    url = "https://github.com/metakirby5/codi.vim"
-  },
-  ["diffview.nvim"] = {
-    loaded = true,
-    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/diffview.nvim",
-    url = "https://github.com/sindrets/diffview.nvim"
-  },
-  ["editorconfig-vim"] = {
-    loaded = true,
-    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/editorconfig-vim",
-    url = "https://github.com/editorconfig/editorconfig-vim"
-  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -134,26 +123,37 @@ _G.packer_plugins = {
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/fzf",
     url = "https://github.com/junegunn/fzf"
   },
-  ["indent-blankline.nvim"] = {
-    config = { "require('plugins.indent-blankline')" },
+  ["lsp-zero.nvim"] = {
     loaded = true,
-    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
-    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
+    url = "https://github.com/VonHeikemen/lsp-zero.nvim"
   },
   ["lualine.nvim"] = {
-    config = { "require('plugins.lualine')" },
     loaded = true,
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
   ["markdown-preview.nvim"] = {
-    commands = { "MarkdownPreview" },
-    config = { "vim.cmd[[doautocmd BufEnter]]" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/opt/markdown-preview.nvim",
     url = "https://github.com/iamcco/markdown-preview.nvim"
+  },
+  ["mason-lspconfig.nvim"] = {
+    loaded = true,
+    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+  },
+  ["mason-null-ls.nvim"] = {
+    loaded = true,
+    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/mason-null-ls.nvim",
+    url = "https://github.com/jayp0521/mason-null-ls.nvim"
+  },
+  ["mason.nvim"] = {
+    loaded = true,
+    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
   },
   ["null-ls.nvim"] = {
     loaded = true,
@@ -168,7 +168,6 @@ _G.packer_plugins = {
     url = "https://github.com/kevinhwang91/nvim-bqf"
   },
   ["nvim-cmp"] = {
-    config = { "require('plugins.cmp')" },
     loaded = true,
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
@@ -178,24 +177,24 @@ _G.packer_plugins = {
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/nvim-dap",
     url = "https://github.com/mfussenegger/nvim-dap"
   },
-  ["nvim-lsp-ts-utils"] = {
-    loaded = true,
-    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/nvim-lsp-ts-utils",
-    url = "https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils"
-  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-markdown"] = {
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/opt/nvim-markdown",
+    url = "https://github.com/ixru/nvim-markdown"
+  },
   ["nvim-tree.lua"] = {
-    config = { "require('plugins.nvim-tree')" },
     loaded = true,
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
     url = "https://github.com/kyazdani42/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
-    config = { "require('plugins.treesitter')" },
     loaded = true,
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
@@ -220,9 +219,8 @@ _G.packer_plugins = {
     url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/opt/packer.nvim",
+    loaded = true,
+    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
   ["plenary.nvim"] = {
@@ -230,16 +228,19 @@ _G.packer_plugins = {
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["popup.nvim"] = {
+    load_after = {
+      ["cheatsheet.nvim"] = true
+    },
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/opt/popup.nvim",
+    url = "https://github.com/nvim-lua/popup.nvim"
+  },
   ["rust-tools.nvim"] = {
-    config = { "require('plugins.rust-tools')" },
     loaded = true,
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
     url = "https://github.com/simrat39/rust-tools.nvim"
-  },
-  ["schemastore.nvim"] = {
-    loaded = true,
-    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/schemastore.nvim",
-    url = "https://github.com/b0o/schemastore.nvim"
   },
   ["targets.vim"] = {
     loaded = true,
@@ -257,13 +258,11 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
   },
   ["telescope.nvim"] = {
-    config = { "require('plugins.telescope')" },
     loaded = true,
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["tokyonight.nvim"] = {
-    config = { "require('plugins.colours')" },
     loaded = true,
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
     url = "https://github.com/folke/tokyonight.nvim"
@@ -283,26 +282,15 @@ _G.packer_plugins = {
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/vim-exchange",
     url = "https://github.com/tommcdo/vim-exchange"
   },
-  ["vim-fish"] = {
+  ["vim-fugitive"] = {
     loaded = true,
-    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/vim-fish",
-    url = "https://github.com/dag/vim-fish"
+    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
   },
   ["vim-gitgutter"] = {
     loaded = true,
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/vim-gitgutter",
     url = "https://github.com/airblade/vim-gitgutter"
-  },
-  ["vim-hexokinase"] = {
-    loaded = true,
-    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/vim-hexokinase",
-    url = "https://github.com/rrethy/vim-hexokinase"
-  },
-  ["vim-illuminate"] = {
-    config = { "require('plugins.illuminate')" },
-    loaded = true,
-    path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/vim-illuminate",
-    url = "https://github.com/RRethy/vim-illuminate"
   },
   ["vim-repeat"] = {
     loaded = true,
@@ -335,13 +323,11 @@ _G.packer_plugins = {
     url = "https://github.com/tpope/vim-unimpaired"
   },
   ["zen-mode.nvim"] = {
-    config = { "require('plugins.zen-mode')" },
     loaded = true,
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/zen-mode.nvim",
     url = "https://github.com/folke/zen-mode.nvim"
   },
   ["zk-nvim"] = {
-    config = { "require('plugins.zk-nvim')" },
     loaded = true,
     path = "/Users/bingocaller/.local/share/nvim/site/pack/packer/start/zk-nvim",
     url = "https://github.com/mickael-menu/zk-nvim"
@@ -349,59 +335,15 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: rust-tools.nvim
-time([[Config for rust-tools.nvim]], true)
-require('plugins.rust-tools')
-time([[Config for rust-tools.nvim]], false)
--- Config for: nvim-tree.lua
-time([[Config for nvim-tree.lua]], true)
-require('plugins.nvim-tree')
-time([[Config for nvim-tree.lua]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-require('plugins.treesitter')
-time([[Config for nvim-treesitter]], false)
--- Config for: zk-nvim
-time([[Config for zk-nvim]], true)
-require('plugins.zk-nvim')
-time([[Config for zk-nvim]], false)
--- Config for: zen-mode.nvim
-time([[Config for zen-mode.nvim]], true)
-require('plugins.zen-mode')
-time([[Config for zen-mode.nvim]], false)
--- Config for: tokyonight.nvim
-time([[Config for tokyonight.nvim]], true)
-require('plugins.colours')
-time([[Config for tokyonight.nvim]], false)
--- Config for: vim-illuminate
-time([[Config for vim-illuminate]], true)
-require('plugins.illuminate')
-time([[Config for vim-illuminate]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-require('plugins.telescope')
-time([[Config for telescope.nvim]], false)
--- Config for: indent-blankline.nvim
-time([[Config for indent-blankline.nvim]], true)
-require('plugins.indent-blankline')
-time([[Config for indent-blankline.nvim]], false)
--- Config for: nvim-cmp
-time([[Config for nvim-cmp]], true)
-require('plugins.cmp')
-time([[Config for nvim-cmp]], false)
--- Config for: lualine.nvim
-time([[Config for lualine.nvim]], true)
-require('plugins.lualine')
-time([[Config for lualine.nvim]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
-pcall(vim.api.nvim_create_user_command, 'MarkdownPreview', function(cmdargs)
-          require('packer.load')({'markdown-preview.nvim'}, { cmd = 'MarkdownPreview', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+pcall(vim.api.nvim_create_user_command, 'Cheatsheet', function(cmdargs)
+          require('packer.load')({'cheatsheet.nvim'}, { cmd = 'Cheatsheet', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
         end,
         {nargs = '*', range = true, bang = true, complete = function()
-          require('packer.load')({'markdown-preview.nvim'}, {}, _G.packer_plugins)
-          return vim.fn.getcompletion('MarkdownPreview ', 'cmdline')
+          require('packer.load')({'cheatsheet.nvim'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('Cheatsheet ', 'cmdline')
       end})
 time([[Defining lazy-load commands]], false)
 
@@ -409,11 +351,16 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType qf ++once lua require("packer.load")({'nvim-bqf'}, { ft = "qf" }, _G.packer_plugins)]]
 vim.cmd [[au FileType typescriptreact ++once lua require("packer.load")({'nvim-ts-autotag', 'nvim-ts-context-commentstring'}, { ft = "typescriptreact" }, _G.packer_plugins)]]
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'nvim-markdown', 'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType qf ++once lua require("packer.load")({'nvim-bqf'}, { ft = "qf" }, _G.packer_plugins)]]
 vim.cmd [[au FileType typescript ++once lua require("packer.load")({'nvim-ts-autotag', 'nvim-ts-context-commentstring'}, { ft = "typescript" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
+vim.cmd [[augroup filetypedetect]]
+time([[Sourcing ftdetect script at: /Users/bingocaller/.local/share/nvim/site/pack/packer/opt/nvim-markdown/ftdetect/markdown.vim]], true)
+vim.cmd [[source /Users/bingocaller/.local/share/nvim/site/pack/packer/opt/nvim-markdown/ftdetect/markdown.vim]]
+time([[Sourcing ftdetect script at: /Users/bingocaller/.local/share/nvim/site/pack/packer/opt/nvim-markdown/ftdetect/markdown.vim]], false)
 vim.cmd("augroup END")
 
 _G._packer.inside_compile = false

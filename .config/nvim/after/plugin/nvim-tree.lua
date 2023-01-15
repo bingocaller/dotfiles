@@ -1,9 +1,6 @@
-local nvim_tree = require("nvim-tree")
-local u = require("utils")
-
 -- Necessary to initialise nvim-tree
 -- following options are the default
-nvim_tree.setup({
+require("nvim-tree").setup({
 	actions = {
 		open_file = {
 			-- if true the tree will resize itself after opening a file
@@ -29,6 +26,5 @@ nvim_tree.setup({
 	},
 })
 
-u.nmap("<C-n>", ":NvimTreeToggle<CR>", { noremap = true })
-u.nmap("<leader>r", ":NvimTreeRefresh<CR>", { noremap = true })
-u.nmap("<leader>n", ":NvimTreeFindFile<CR>", { noremap = true })
+vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>")
+vim.keymap.set("n", "<leader>n", ":NvimTreeFindFile<CR>")
