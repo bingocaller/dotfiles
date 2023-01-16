@@ -1,0 +1,7 @@
+# Set title length to 50 (72 = default)
+[title-max-length]
+line-length = 50
+
+# Set body max. line length to 72 (80 = default)
+[body-max-line-length]
+line-length = 72

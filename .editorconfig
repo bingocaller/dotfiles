@@ -1,13 +1,19 @@
 # http://editorconfig.org
-root = true # Prevents searching for other .editorconfigs
+
+# Prevents searching for other .editorconfigs
+root = true 
 
 [*]
 charset = utf-8
 end_of_line = lf
-indent_size = 2
-indent_style = space
+indent_size = 4
+indent_style = tab
 insert_final_newline = true
 trim_trailing_whitespace = true
+
+[*.{css, scss}, *.json]
+indent_size = 2
+indent_style = space
 
 [*.md]
 trim_trailing_whitespace = false
