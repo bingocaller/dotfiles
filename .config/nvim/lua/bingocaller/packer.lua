@@ -55,12 +55,10 @@ return require("packer").startup(function(use)
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 	use({
 		"windwp/nvim-ts-autotag",
-		opt = true,
 		ft = { "typescript", "typescriptreact" },
 	}) -- automatically close jsx tags
 	use({
 		"JoosepAlviste/nvim-ts-context-commentstring",
-		opt = true,
 		ft = { "typescript", "typescriptreact" },
 	}) -- makes jsx comments actually work
 
