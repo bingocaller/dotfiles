@@ -77,7 +77,12 @@ vim.opt.undofile = true
 vim.opt.incsearch = true
 
 -- Highlight on yank
-vim.highlight.on_yank({ higroup = "IncSearch", timeout = 300 })
+vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+	pattern = { "*" },
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})
 
 -- Ignore case unless capital letters are used
 vim.opt.ignorecase = true
