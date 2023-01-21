@@ -2,6 +2,9 @@
 vim.opt_local.wrap = true
 vim.opt_local.spell = true
 
+-- Unset line length limit and (implicitly) disable highlight
+vim.opt.textwidth = 0
+
 -- Settings for nvim-markdown
 -- https://github.com/ixru/nvim-markdown
 -- Don't conceal characters (in links and text formatting).
