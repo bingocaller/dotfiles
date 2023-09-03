@@ -57,7 +57,7 @@
 [interactive]
   diffFilter = delta --color-only
 [delta]
-  features = line-numbers decorations side-by-side ; disabled side-by-side
+  features = line-numbers decorations; disabled side-by-side
   syntax-theme = ansi
   whitespace-error-style = 22 reverse
 [delta "decorations"]
