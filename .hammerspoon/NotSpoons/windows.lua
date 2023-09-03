@@ -1,3 +1,8 @@
+---------------------
+-- WINDOW MANAGEMENT
+---------------------
+local message = require("NotSpoons.status-message")
+
 hs.window.animationDuration = 0
 
 --------------------------------------------------------------------------------
@@ -22,7 +27,6 @@ hs.window.animationDuration = 0
 
 local windowLayoutMode = hs.hotkey.modal.new({}, "F16")
 
-local message = require("NotSpoons/status-message")
 windowLayoutMode.statusMessage = message.new("")
 windowLayoutMode.entered = function()
 	windowLayoutMode.statusMessage:show()

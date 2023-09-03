@@ -1,3 +1,5 @@
+local message = require("NotSpoons.status-message")
+
 local function wrapSelectedText(wrapCharacters)
 	-- Preserve the current contents of the system clipboard
 	local originalClipboardContents = hs.pasteboard.getContents()
@@ -65,8 +67,6 @@ end
 --------------------------------------------------------------------------------
 
 local markdownMode = hs.hotkey.modal.new({}, "F20")
-
-local message = require("NotSpoons/status-message")
 markdownMode.statusMessage = message.new("Markdown Mode (control-m)")
 markdownMode.entered = function()
 	markdownMode.statusMessage:show()

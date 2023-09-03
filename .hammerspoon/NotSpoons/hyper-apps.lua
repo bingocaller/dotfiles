@@ -1,7 +1,7 @@
--- Reserved by other apps/functions:
+-- Reserved by other apps/functions (see .hammerspoon/init.lua):
 -- c (Caffeine),
 -- l (Flux),
--- s (Spotify), -- Not any longer
+-- t (Tidal),
 -- s (Shade),
 -- = (Mute/Unmute)
 -- d (Do Not Disturb)
@@ -24,9 +24,11 @@ return {
 	{ "p", "Plug", "circle-heart", "Font Awesome 6 Pro Solid" },
 	-- "R" for "discoRd"
 	{ "r", "Discord", "discord", "Font Awesome 6 Brands" },
-	-- "T" for "Talk"
-	{ "t", "Slack", "slack", "Font Awesome 6 Brands" },
-	-- { 't', 'Ripcord', 'comments', 'Font Awesome 6 Pro Solid' },
+	-- "S" for "Slack"
+	{ "s", "Slack", "slack", "Font Awesome 6 Brands" },
+	-- "T" for "Tidal"
+	-- { "t", "Tidal", "waveform-lines", "Font Awesome 6 Pro Solid" },
+	{ "t", "Tidal", "gramophone", "Font Awesome 6 Pro Solid" },
 	-- "V" for "Visual Studio Code/VSCodium"
 	{ "v", "VSCodium", "code", "Font Awesome 6 Pro Solid" },
 	-- "X" for "Xcode"
