@@ -98,7 +98,8 @@ return require("packer").startup(function(use)
 	-- Utilities and niceness
 
 	-- Show git info in gutter and more
-	use("airblade/vim-gitgutter")
+	-- use("airblade/vim-gitgutter")
+	use("lewis6991/gitsigns.nvim")
 	-- Sort things using a motion
 	use("christoomey/vim-sort-motion")
 	-- Better quickfix
@@ -120,8 +121,6 @@ return require("packer").startup(function(use)
 	use("tpope/vim-abolish")
 	-- Toggle comments
 	use("tpope/vim-commentary")
-	-- git integration
-	use("tpope/vim-fugitive")
 	-- Enable repeating lots more stuff
 	use("tpope/vim-repeat")
 	-- Surround stuff with other stuff
