@@ -139,3 +139,51 @@ vim.g.markdown_fenced_languages = {
 	"typescript",
 	"vim",
 }
+
+-- Abbreviations
+-- Most of these are from https://vonheikemen.github.io/devlog/tools/using-vim-abbreviations/
+
+-- Typos
+vim.cmd("iabbrev borad board")
+vim.cmd("iabbrev chagne change")
+vim.cmd("iabbrev heigth height")
+vim.cmd("iabbrev teh the")
+vim.cmd("iabbrev widht width")
+
+-- "Snippets" for JS/TS
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "javascript", "typescript", "typescriptreact" },
+	command = "iabbrev <buffer> log console.log();<Left><Left>",
+})
+
+-- IIFEs
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "javascript", "typescript", "typescriptreact" },
+	command = "iabbrev <buffer> iife (function() {})();<C-o>4h<CR><CR><Up><C-i>",
+})
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "javascript", "typescript", "typescriptreact" },
+	command = "iabbrev <buffer> iife> (() => {})();<C-o>4h<CR><CR><Up><C-i>",
+})
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "javascript", "typescript", "typescriptreact" },
+	command = "iabbrev <buffer> aiife (async function() {})();<C-o>4h<CR><CR><Up><C-i>",
+})
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "javascript", "typescript", "typescriptreact" },
+	command = "iabbrev <buffer> aiife> (async () => {})();<C-o>4h<CR><CR><Up><C-i>",
+})
+
+-- `for` loops
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "javascript", "typescript", "typescriptreact" },
+	command = "iabbrev <buffer> for@ for(let i = 0; i < z; i++) {<CR><CR>}<Esc>?z<CR>s",
+})
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "javascript", "typescript", "typescriptreact" },
+	command = "iabbrev <buffer> forof for (const z of array) {<CR><CR>}<Esc>?z<CR>s",
+})
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "javascript", "typescript", "typescriptreact" },
+	command = "iabbrev <buffer> forin for (const z in object) {<CR><CR>}<Esc>?z<CR>s",
+})
