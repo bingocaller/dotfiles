@@ -4,14 +4,7 @@ vim.opt.relativenumber = true
 
 -- Always show the signcolumn, otherwise it would shift the text each time
 -- diagnostics appear/become resolved.
-vim.cmd([[
-  if has("patch-8.1.1564")
-    " Recently vim can merge signcolumn and number column into one
-    set signcolumn=number
-  else
-    set signcolumn=yes
-  endif
-]])
+vim.opt.signcolumn = "yes"
 
 -- Indentation
 vim.opt.tabstop = 4
@@ -19,19 +12,19 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
 
--- Do extra smart auto-indentation
-vim.opt.smartindent = true
-
--- Show tabs and spaces as characters
-vim.opt.list = true
-vim.opt.listchars:append("tab:│  ,lead:·,trail:·")
-
 -- Exceptions; could also be handled in ftplugin,
 -- but it becomes untenable with many different file types
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	pattern = { "*.css", "*.scss", "*.sass", "*.json" },
 	command = "setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab",
 })
+
+-- Do extra smart auto-indentation
+vim.opt.smartindent = true
+
+-- Show tabs and spaces as characters
+vim.opt.list = true
+vim.opt.listchars:append("tab:│  ,lead:·,trail:·")
 
 -- Set line length limit and highlight the boundary
 vim.opt.textwidth = 80
@@ -66,8 +59,8 @@ vim.opt.backup = false
 vim.opt.writebackup = false
 
 -- Don't drop undo history when abandoning a buffer
--- 20222-01-07: Experimentally remove this in favour of undofile
--- vim.opt.hidden = true
+-- 2022-01-07: Experimentally remove this in favour of undofile
+vim.opt.hidden = false
 
 -- Persistent undo, requires the presence of ~/.vim/undodir directory!
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
@@ -123,7 +116,7 @@ vim.opt.laststatus = 3
 
 -- Always use Python 3
 vim.opt.pyxversion = 3
-vim.g.python3_host_prog = "/usr/local/bin/python3"
+vim.g.python3_host_prog = "/usr/local/bin/python3.10"
 -- Don't load Python2 provider
 vim.g.loaded_python_provider = 0
 
