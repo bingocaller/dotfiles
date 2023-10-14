@@ -52,10 +52,10 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+y$]])
 
 -- Show quickfixlist
-vim.keymap.set("n", "<leader>qf", ":copen<cr>")
+vim.keymap.set("n", "<leader>q", ":copen<cr>")
 
 -- Search and replace word under cursor for current buffer
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/I<Left><Left>]])
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/I<Left><Left>]], { noremap = true })
 
 -- ----------------
 -- Window switching
@@ -119,24 +119,3 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
 	pattern = { "help", "qf" },
 	command = "nnoremap <buffer> q :q<CR>",
 })
-
------------
--- Plugins
------------
-
--- Keymaps are reflected here as comments to help keep track of remaps
-
--- vim-fugitive
--- vim .keymap.set("n", "<leader>gs", vim.cmd.Git)
-
---- nvim-tree
--- vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>")
--- vim.keymap.set("n", "<leader>n", ":NvimTreeFindFile<CR>")
-
--- Telescope
--- vim.keymap.set('n', '<C-p>', builtin.find_files, {})
--- vim.keymap.set('n', '<C-h>', builtin.oldfiles, {})
--- vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
--- vim.keymap.set('n', '<leader>ps', function()
--- 	builtin.grep_string({ search = vim.fn.input("Grep > ") });
--- end)
