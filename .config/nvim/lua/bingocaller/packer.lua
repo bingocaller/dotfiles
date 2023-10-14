@@ -81,14 +81,20 @@ return require("packer").startup(function(use)
 
 	use({
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.0",
+		tag = "0.1.1",
 		requires = {
-			{ "nvim-lua/plenary.nvim" },
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+
+			-- Extensions
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
 				run = "make",
 			},
-			{ "nvim-telescope/telescope-ui-select.nvim" },
+			"nvim-telescope/telescope-ui-select.nvim",
+			"nvim-telescope/telescope-github.nvim",
+			"nvim-lua/popup.nvim", -- required by telescope-zoxide
+			"jvgrootveld/telescope-zoxide",
 		},
 	})
 	-- File explorer
