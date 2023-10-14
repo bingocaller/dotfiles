@@ -101,14 +101,14 @@ return require("packer").startup(function(use)
 	})
 	-- File explorer
 	use({
-		"kyazdani42/nvim-tree.lua",
-		requires = { "kyazdani42/nvim-web-devicons" },
+		"nvim-tree/nvim-tree.lua",
+		requires = "nvim-tree/nvim-web-devicons",
 	})
 
 	-- Status line
 	use({
 		"nvim-lualine/lualine.nvim", -- status line
-		requires = { "kyazdani42/nvim-web-devicons" },
+		requires = "nvim-tree/nvim-web-devicons",
 	})
 
 	-- Utilities and niceness
