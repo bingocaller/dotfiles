@@ -143,9 +143,13 @@ return require("packer").startup(function(use)
 	use("tpope/vim-surround")
 	-- Lots of mappings
 	use("tpope/vim-unimpaired")
+	-- Split/join blocks of code
+	use({
+		"Wansmer/treesj",
+		requires = { "nvim-treesitter" },
+	})
 
 	-- Cheatsheet
-	--
 	use({
 		"sudormrfbin/cheatsheet.nvim",
 		opt = true,
