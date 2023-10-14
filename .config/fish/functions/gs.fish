@@ -94,7 +94,7 @@ function __parse_state -a state -d "parse the current state"
     echo $current_state
 end
 
-function __handle_renames_and_copies -a idx name -d "removes explict rename or copy paths for unstaged files"
+function __handle_renames_and_copies -a idx name -d "removes explicit rename or copy paths for unstaged files"
     if test $idx = "R"
         or test $idx = "C"
         set elements (string split " -> " $name)
