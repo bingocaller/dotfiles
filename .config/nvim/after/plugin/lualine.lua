@@ -1,3 +1,6 @@
+-- Lualine takes care of this; no need to show it twice.
+vim.opt.showmode = false
+
 require("lualine").setup({
 	options = {
 		theme = "catppuccin",
@@ -22,5 +25,5 @@ require("lualine").setup({
 			"os.date('%H:%M')",
 		},
 	},
-	extensions = { "nvim-tree" },
+	extensions = { "fzf", "man", "nvim-tree", "quickfix" },
 })
