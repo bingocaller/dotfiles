@@ -11,3 +11,7 @@ vim.opt_local.expandtab = true
 -- length limit is highlighted by default, see bingocaller/set.lua)
 vim.opt_local.textwidth = 72
 vim.opt_local.colorcolumn:append("51")
+
+-- Start in insert mode at end of the first line. Basically, saves typing A
+-- every time a commit is started.
+vim.cmd("startinsert!")
