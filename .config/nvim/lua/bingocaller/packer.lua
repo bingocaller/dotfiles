@@ -60,6 +60,8 @@ return require("packer").startup(function(use)
 		},
 	})
 
+	use("jose-elias-alvarez/typescript.nvim")
+
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 	use({
 		"windwp/nvim-ts-autotag",
