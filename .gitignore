@@ -1,11 +1,24 @@
 .DS_Store
 
+#──────╮
+# Fish │
+#──────╯
 fishd.tmp.*
+fish_variables
+# Plugin functions
+.config/fish/functions/_*.fish
+.config/fish/functions/tide
 
+#───────────╮
+# Karabiner │
+#───────────╯
 .config/karabiner/automatic_backups
 
-.config/nvim/spell
-
+#────────────╮
+# Vim/Neovim │
+#────────────╯
 vim/.vim/.netrwhist
 vim/.vim/plugged
 vim/.vim/undodir
+
+.config/nvim/spell

@@ -1,18 +1,18 @@
 [core]
-  editor = nvim
-  excludesFile = /Users/bingocaller/.gitignore_global
-  pager = delta
+	editor = nvim
+	excludesFile = ~/.gitignore_global
+	pager = delta
   ; pager = diff-so-fancy | less --tabs=2 -RFX
 [user]
-  initials = JNJ
-  email = jesper.nellemann@gmail.com
-  name = Jesper Nellemann Jakobsen
+	initials = JNJ
+	email = jesper.nellemann@gmail.com
+	name = Jesper Nellemann Jakobsen
 [color]
-  branch = auto
-  diff = auto
-  interactive = auto
-  status = auto
-  ui = true
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+	ui = true
 ; [color "diff-highlight"]
 ;   oldNormal = red bold
 ;   oldHighlight = red bold 52
@@ -26,46 +26,46 @@
 ;   new = green bold
 ;   whitespace = red reverse
 [push]
-  default = simple
+	default = simple
 [pull]
-  rebase = false
+	rebase = true
 [commit]
-	template = /Users/bingocaller/.git_commit_message
-  # template = /Users/bingocaller/.git-commit-template
+	template = ~/.git_commit_message
+  # template = ~/.git-commit-template
 [merge]
-  tool = vimdiff
+	tool = vimdiff
 [mergetool]
-  prompt = false
+	prompt = false
 [apply]
-  whitespace = nowarn
+	whitespace = nowarn
 [fetch]
-  prune = true
+	prune = true
 [diff]
-  colorMoved = default
+	colorMoved = default
 [alias]
-  lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-  lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-  lg = !"git lg1"
+	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	lg = !"git lg1"
 [filter "lfs"]
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 ; [pager]
 ;   diff = diff-so-fancy | less --tabs=2 -RFX
 ;   show = diff-so-fancy | less --tabs=2 -RFX
 [interactive]
-  diffFilter = delta --color-only
+	diffFilter = delta --color-only
 [delta]
-  features = line-numbers decorations; disabled side-by-side
-  syntax-theme = ansi
-  whitespace-error-style = 22 reverse
+	features = line-numbers decorations; disabled side-by-side
+	syntax-theme = ansi
+	whitespace-error-style = 22 reverse
 [delta "decorations"]
-  commit-decoration-style = bold yellow box ul
-  file-decoration-style = none
-  file-style = bold yellow ul
+	commit-decoration-style = bold yellow box ul
+	file-decoration-style = none
+	file-style = bold yellow ul
 [github]
-  user = bingocaller
+	user = bingocaller
 [init]
 	defaultBranch = main
 [status]
