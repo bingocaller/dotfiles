@@ -19,27 +19,35 @@ return require("packer").startup(function(use)
 	-- https://github.com/VonHeikemen/lsp-zero.nvim
 	use({
 		"VonHeikemen/lsp-zero.nvim",
+		branch = "v2.x",
 		requires = {
 			-- LSP Support
-			{ "neovim/nvim-lspconfig" },
-			{ "williamboman/mason.nvim" },
-			{ "williamboman/mason-lspconfig.nvim" },
-			-- Mason Formatter setup
-			{ "jose-elias-alvarez/null-ls.nvim" },
-			{ "jayp0521/mason-null-ls.nvim" },
+			"neovim/nvim-lspconfig", -- Required
+			{
+				-- Optional
+				"williamboman/mason.nvim",
+				run = function()
+					pcall(vim.cmd, "MasonUpdate")
+				end,
+			},
+			"williamboman/mason-lspconfig.nvim", -- Optional
+
+			-- null-ls
+			"jose-elias-alvarez/null-ls.nvim",
+			"jay-babu/mason-null-ls.nvim",
 
 			-- Autocompletion
-			{ "hrsh7th/nvim-cmp" },
-			{ "hrsh7th/cmp-buffer" },
-			{ "hrsh7th/cmp-path" },
-			{ "saadparwaiz1/cmp_luasnip" },
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/cmp-nvim-lua" },
+			"hrsh7th/nvim-cmp", -- Required
+			"hrsh7th/cmp-nvim-lsp", -- Required
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-path",
+			"saadparwaiz1/cmp_luasnip",
 
 			-- Snippets
-			{ "L3MON4D3/LuaSnip" },
+			"L3MON4D3/LuaSnip", -- Required
 			-- Snippet Collection (Optional)
-			{ "rafamadriz/friendly-snippets" },
+			"rafamadriz/friendly-snippets",
 		},
 	})
 	-- rust-tools is not provided by Mason
