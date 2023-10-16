@@ -5,18 +5,28 @@
 # Update Homebrew, npm, fisher, and their installed packages; get macOS Software
 # Updates.
 function update
-	echo -e "\n-----------------\nUPDATING HOMEBREW\n-----------------\n";
+	echo -e "╭───────────────────╮"
+	echo -e "│ UPDATING HOMEBREW │"
+	echo -e "╰───────────────────╯";
 	brew update && brew upgrade;
-	echo -e "\n----------------\nHOMEBREW CLEANUP\n----------------\n";
+	echo -e "╭──────────────────╮"
+	echo -e "│ HOMEBREW CLEANUP │"
+	echo -e "╰──────────────────╯";
 	brew cleanup;
 
-	echo -e "\n----------\nNPM UPDATE\n----------\n";
+	echo -e "╭────────────╮"
+	echo -e "│ NPM UPDATE │"
+	echo -e "╰────────────╯";
 	npm-check -gu;
 
-	echo -e "\n---------------------\nUPDATING FISH PLUGINS\n---------------------\n";
+	echo -e "╭───────────────────────╮"
+	echo -e "│ UPDATING FISH PLUGINS │"
+	echo -e "╰───────────────────────╯";
 	fisher update;
 
 	# Update Apple software last, since this can sometimes entail a restart.
-	echo -e "\n-----------------------\nUPDATING APPLE SOFTWARE\n-----------------------\n";
+	echo -e "╭─────────────────────────╮"
+	echo -e "│ UPDATING APPLE SOFTWARE │"
+	echo -e "╰─────────────────────────╯";
 	sudo softwareupdate -i -a;
 end
