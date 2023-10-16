@@ -1,6 +1,4 @@
--- Enable wrapping and spell-checking
-vim.opt_local.wrap = true
-vim.opt_local.spell = true
+-- Enable wrapping and spell-checking vim.opt_local.wrap = true vim.opt_local.spell = true
 
 -- Unset line length limit and (implicitly) disable highlight
 vim.opt.textwidth = 0
@@ -25,3 +23,7 @@ vim.g.vim_markdown_fenced_languages = {
 	"typescript",
 	"vim",
 }
+-- Move Markdown_CreateLink to Control-l instead of Control-k, to not override
+-- digraph functionality. (:h digraphs-use)
+vim.keymap.set("i", "<Plug>", "<Plug>Markdown_CreateLink", {})
+vim.keymap.set("i", "<C-l>", "<Plug>Markdown_CreateLink", {})
