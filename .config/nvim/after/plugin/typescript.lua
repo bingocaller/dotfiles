@@ -1,5 +1,5 @@
 -- Default settings
-require("typescript").setup({
+-- require("typescript").setup({
 	-- disable_commands = false, -- prevent the plugin from creating Vim commands
 	-- debug = false, -- enable debug logging for commands
 	-- go_to_source_definition = {
@@ -8,4 +8,4 @@ require("typescript").setup({
 	-- server = { -- pass options to lspconfig's setup method
 	-- 	on_attach = ...,
 	-- },
-})
+-- })
