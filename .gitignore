@@ -6,8 +6,11 @@
 fishd.tmp.*
 fish_variables
 # Plugin functions
+.config/fish/completions
+.config/fish/conf.d/
 .config/fish/functions/_*.fish
-.config/fish/functions/tide
+.config/fish/functions/fish_prompt.fish
+.config/fish/functions/tide*
 
 #───────────╮
 # Karabiner │
