@@ -1,6 +1,6 @@
 ~/dev/dotfiles/fish-functions
 jorgebucaran/fisher
 jorgebucaran/nvm.fish
-IlanCosman/tide@v5
 wfxr/forgit
 PatrickF1/fzf.fish
+ilancosman/tide@v6
