@@ -12,49 +12,79 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	-- The colorscheme should be available when starting Neovim
+	-- The colour scheme should be available when starting Neovim
 	{
 		"catppuccin/nvim",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		name = "catppuccin",
 		priority = 1000, -- make sure to load this before all the other start plugins
 	},
 
-	{ "nvim-treesitter/nvim-treesitter",  build = ":TSUpdate" },
+	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
 	-- LSP setup via LSP Zero
 	-- https://github.com/VonHeikemen/lsp-zero.nvim
-	{ 'williamboman/mason.nvim' },
-	{ 'williamboman/mason-lspconfig.nvim' },
 	{
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v3.x',
 		config = false,
-	},
-	{
-		-- LSP Support
-		'neovim/nvim-lspconfig',
 		dependencies = {
-			{ 'hrsh7th/cmp-nvim-lsp' },
+			-- LSP Support
+			'neovim/nvim-lspconfig',
+			-- Installer for LSPs
+			'williamboman/mason.nvim',
+			'williamboman/mason-lspconfig.nvim',
+			{
+				-- Autocompletion
+				'hrsh7th/nvim-cmp',
+				dependencies = {
+					{
+						"f3fora/cmp-spell",
+						"hrsh7th/cmp-buffer",
+						"hrsh7th/cmp-cmdline",
+						"hrsh7th/cmp-nvim-lsp",
+						"hrsh7th/cmp-path",
+						"L3MON4D3/LuaSnip",
+						"saadparwaiz1/cmp_luasnip",
+						"rafamadriz/friendly-snippets",
+					}
+				},
+			},
 		}
-	},
-	{
-		-- Autocompletion
-		'hrsh7th/nvim-cmp',
-		dependencies = {
-			{ 'L3MON4D3/LuaSnip' }
-		},
 	},
 
 	{
 		-- rust-tools is not provided by Mason
 		"simrat39/rust-tools.nvim",
 		ft = "rust",
+		config = true,
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"nvim-lua/plenary.nvim",
-			"mfussenegger/nvim-dap",
+			-- "mfussenegger/nvim-dap", -- Not currently used
 		},
+	},
+
+	-- TypeScript stuff
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		ft = { "typescript", "typescriptreact" },
+		-- Will implicitly call require(MAIN).setup({})
+		-- See `opts`/`config` here:
+		-- https://github.com/folke/lazy.nvim#-plugin-spec
+		opts = {},
+	},
+	{
+		-- Automatically close TSX tags
+		"windwp/nvim-ts-autotag",
+		ft = { "typescript", "typescriptreact" },
+		config = true,
+	},
+	{
+		-- Makes TSX comments actually work
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		ft = { "typescript", "typescriptreact" },
+		config = true,
 	},
 
 	{
@@ -79,14 +109,14 @@ require("lazy").setup({
 			{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 		},
 	},
-	{
-		-- Neovim plugin to improve the default vim.ui interfaces
-		'stevearc/dressing.nvim',
-		lazy = false,
-	},
+	-- Improve the default vim.ui interfaces
+	'stevearc/dressing.nvim',
 
 	-- Sort things using a motion
-	{ "christoomey/vim-sort-motion", lazy = false },
+	{
+		"christoomey/vim-sort-motion",
+		keys = 'gs',
+	},
 	{
 		-- Better quickfix
 		"kevinhwang91/nvim-bqf",
@@ -101,30 +131,36 @@ require("lazy").setup({
 		},
 	},
 	-- Show VCS info in gutter and more
-	{ "lewis6991/gitsigns.nvim",     lazy = false },
-	-- Switch things around using `cx`
-	{ "tommcdo/vim-exchange",        lazy = false },
-	-- Abbreviation, Substitustion, Coercion
-	{ "tpope/vim-abolish",           lazy = false },
-	-- Toggle comments
-	{ "tpope/vim-commentary",        lazy = false },
+	"lewis6991/gitsigns.nvim",
+	{
+		-- Switch things around using `cx`
+		"tommcdo/vim-exchange",
+		keys = 'cx',
+	},
+	-- Abbreviation, Substitution, Coercion
+	"tpope/vim-abolish",
+	{
+		-- Toggle comments
+		"tpope/vim-commentary",
+		keys = 'gc',
+	},
 	-- Git & Hub
-	{ "tpope/vim-fugitive",          lazy = false },
-	{ "tpope/vim-rhubarb",           lazy = false },
+	"tpope/vim-fugitive",
+	"tpope/vim-rhubarb",
 	-- Enable repeating lots more stuff
-	{ "tpope/vim-repeat",            lazy = false },
+	"tpope/vim-repeat",
 	-- Surround stuff with other stuff
-	{ "tpope/vim-surround",          lazy = false },
+	{
+		"tpope/vim-surround",
+		keys = { 'cs', 'ds', 'ys', 'S' },
+	},
 	-- Lots of mappings
-	{ "tpope/vim-unimpaired",        lazy = false },
+	"tpope/vim-unimpaired",
 	{
 		-- Split/join blocks of code
 		'Wansmer/treesj',
 		keys = { '<leader>m', '<leader>j', '<leader>s' },
 		dependencies = { 'nvim-treesitter/nvim-treesitter' },
-		config = function()
-			require('treesj').setup()
-		end,
 	},
 
 	-- Tools for writing
@@ -144,9 +180,5 @@ require("lazy").setup({
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
-	},
-}, {
-	defaults = {
-		lazy = true,
 	},
 })
