@@ -10,8 +10,9 @@ vim.keymap.set("n", "Y", "y$")
 vim.keymap.set("n", "<Esc>", ":nohlsearch<cr>", { silent = true })
 
 -- Move selected lines in visual mode.
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- Disabled because J in visual mode also is used for multiline join.
+-- vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+-- vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Keep the cursor in place when joining lines.
 vim.keymap.set("n", "J", "mzJ`z")
