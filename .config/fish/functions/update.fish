@@ -14,6 +14,18 @@ function update
 	echo -e "╰──────────────────╯";
 	brew cleanup;
 
+	echo -e "╭─────────────────╮"
+	echo -e "│ UPDATING NEOVIM │"
+	echo -e "╰─────────────────╯";
+	cd ~/dev;
+	# For some reason the install only works on a fresh clone
+	rm -rf neovim;
+	git clone https://github.com/neovim/neovim;
+	cd neovim;
+	make CMAKE_BUILD_TYPE=RelWithDebInfo;
+	sudo make install;
+	cd ~;
+
 	echo -e "╭────────────╮"
 	echo -e "│ NPM UPDATE │"
 	echo -e "╰────────────╯";
