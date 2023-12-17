@@ -1,7 +1,6 @@
-~/dev/dotfiles/fish-functions
 jorgebucaran/fisher
-jorgebucaran/nvm.fish
-wfxr/forgit
-PatrickF1/fzf.fish
-ilancosman/tide@v6
 catppuccin/fish
+ilancosman/tide@v6
+jorgebucaran/nvm.fish
+PatrickF1/fzf.fish
+wfxr/forgit
