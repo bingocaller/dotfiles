@@ -109,13 +109,3 @@ vim.keymap.set("t", "<a-6>", "<c-\\><c-n>6gt")
 vim.keymap.set("t", "<a-7>", "<c-\\><c-n>7gt")
 vim.keymap.set("t", "<a-8>", "<c-\\><c-n>8gt")
 vim.keymap.set("t", "<a-9>", "<c-\\><c-n>9gt")
-
-----------------
--- Autocommands
-----------------
-
--- Bind `q` to close the buffer for help files and quickfixlist
-vim.api.nvim_create_autocmd({ "Filetype" }, {
-	pattern = { "help", "qf" },
-	command = "nnoremap <buffer> q :q<CR>",
-})

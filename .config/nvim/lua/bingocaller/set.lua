@@ -12,13 +12,6 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
 
--- Exceptions; could also be handled in ftplugin,
--- but it becomes untenable with many different file types
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-	pattern = { "*.css", "*.scss", "*.sass", "*.json" },
-	command = "setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab",
-})
-
 -- Do extra smart auto-indentation
 vim.opt.smartindent = true
 
@@ -68,14 +61,6 @@ vim.opt.undofile = true
 
 -- Use incremental search, i.e. show results as you type
 vim.opt.incsearch = true
-
--- Highlight on yank
-vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-	pattern = { "*" },
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})
 
 -- Ignore case unless capital letters are used
 vim.opt.ignorecase = true
@@ -133,50 +118,14 @@ vim.g.markdown_fenced_languages = {
 	"vim",
 }
 
+----------------
 -- Abbreviations
--- Most of these are from https://vonheikemen.github.io/devlog/tools/using-vim-abbreviations/
+----------------
 
 -- Typos
+-- TODO: Use vim-abolish for these
 vim.cmd("iabbrev borad board")
 vim.cmd("iabbrev chagne change")
 vim.cmd("iabbrev heigth height")
 vim.cmd("iabbrev teh the")
 vim.cmd("iabbrev widht width")
-
--- "Snippets" for JS/TS
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "javascript", "typescript", "typescriptreact" },
-	command = "iabbrev <buffer> log console.log();<Left><Left>",
-})
-
--- IIFEs
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "javascript", "typescript", "typescriptreact" },
-	command = "iabbrev <buffer> iife (function() {})();<C-o>4h<CR><CR><Up><C-i>",
-})
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "javascript", "typescript", "typescriptreact" },
-	command = "iabbrev <buffer> iife> (() => {})();<C-o>4h<CR><CR><Up><C-i>",
-})
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "javascript", "typescript", "typescriptreact" },
-	command = "iabbrev <buffer> aiife (async function() {})();<C-o>4h<CR><CR><Up><C-i>",
-})
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "javascript", "typescript", "typescriptreact" },
-	command = "iabbrev <buffer> aiife> (async () => {})();<C-o>4h<CR><CR><Up><C-i>",
-})
-
--- `for` loops
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "javascript", "typescript", "typescriptreact" },
-	command = "iabbrev <buffer> for@ for(let i = 0; i < z; i++) {<CR><CR>}<Esc>?z<CR>s",
-})
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "javascript", "typescript", "typescriptreact" },
-	command = "iabbrev <buffer> forof for (const z of array) {<CR><CR>}<Esc>?z<CR>s",
-})
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "javascript", "typescript", "typescriptreact" },
-	command = "iabbrev <buffer> forin for (const z in object) {<CR><CR>}<Esc>?z<CR>s",
-})
