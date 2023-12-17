@@ -40,7 +40,8 @@ vim.opt.splitright = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 8
--- The minimal number of screen columns to keep to the left and to the right of the cursor if 'nowrap' is set.
+-- The minimal number of screen columns to keep to the left and to the right of
+-- the cursor if 'nowrap' is set.
 vim.opt.sidescrolloff = 8
 
 -- We don't want to deal with this in .gitignore
@@ -70,7 +71,8 @@ vim.opt.smartcase = true
 -- Can be disabled on a case-by-case basis by appending /g.
 vim.opt.gdefault = true
 
--- Allow for @ in file names; might be useful
+-- Allow for @ in file names; useful for multiple-resolution images (e.g.
+-- image@1x.png, image@2x.png, image@3x.png)
 vim.opt.isfname:append("@-@")
 
 -- Show partial command keys in the status line
@@ -90,7 +92,6 @@ vim.opt.updatetime = 50
 
 -- Don't pass messages to |ins-completion-menu|.
 vim.opt.shortmess:append("c")
--- vim.cmd("set shortmess+=c")
 
 -- Show a global statusline instead of one for each window (Neovim only)
 vim.opt.laststatus = 3
@@ -101,7 +102,7 @@ vim.opt.laststatus = 3
 
 -- Always use Python 3
 vim.opt.pyxversion = 3
-vim.g.python3_host_prog = "/usr/local/bin/python3.10"
+vim.g.python3_host_prog = "/usr/local/bin/python3.11"
 -- Don't load Python2 provider
 vim.g.loaded_python_provider = 0
 
@@ -111,10 +112,12 @@ vim.g.markdown_fenced_languages = {
 	"css",
 	"html",
 	"javascript",
+	"javascriptreact",
 	"lua",
 	"scss",
 	"sh",
 	"typescript",
+	"typescriptreact",
 	"vim",
 }
 

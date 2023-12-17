@@ -56,7 +56,12 @@ vim.keymap.set("n", "<leader>Y", [["+y$]])
 vim.keymap.set("n", "<leader>q", ":copen<cr>")
 
 -- Search and replace word under cursor for current buffer
-vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/I<Left><Left>]], { noremap = true })
+vim.keymap.set(
+	"n",
+	"<leader>r",
+	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/I<Left><Left>]],
+	{ noremap = true }
+)
 
 -- ----------------
 -- Window switching
