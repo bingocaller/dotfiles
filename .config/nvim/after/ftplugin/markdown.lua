@@ -1,4 +1,6 @@
--- Enable wrapping and spell-checking vim.opt_local.wrap = true vim.opt_local.spell = true
+-- Enable wrapping and spell-checking
+vim.opt_local.wrap = true
+vim.opt_local.spell = true
 
 -- Unset line length limit and (implicitly) disable highlight
 vim.opt.textwidth = 0
