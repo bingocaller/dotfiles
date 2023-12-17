@@ -48,4 +48,5 @@ require("catppuccin").setup({
 })
 
 -- setup must be called before loading
+vim.opt.termguicolors = true
 vim.cmd.colorscheme("catppuccin")
