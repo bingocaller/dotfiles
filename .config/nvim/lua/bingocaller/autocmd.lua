@@ -31,6 +31,15 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
 	group = autocmd_group,
 })
 
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+	pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
+	desc = "Auto-format JavaScript/TypeScript files after saving",
+	callback = function()
+		vim.cmd(":EslintFixAll")
+	end,
+	group = autocmd_group,
+})
+
 
 -- "Snippets" for JS/TS using abbreviations.
 -- Most of these are from https://vonheikemen.github.io/devlog/tools/using-vim-abbreviations/
