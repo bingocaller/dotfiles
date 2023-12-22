@@ -59,8 +59,8 @@ abbr -a -- gsh 'git show'
 abbr -a -- gsmp 'git switch main && git pull'
 abbr -a -- gsw 'git switch'
 abbr -a -- gswc 'git switch --create'
-abbr --add ll "eza -l --color always --icons -ah -s type"
-abbr --add ls "eza -G --color auto --icons -a -s type"
+abbr --add ll "eza --long --color always --icons --all --header --hyperlink --sort type"
+abbr --add ls "eza --grid --color auto --icons --all --hyperlink --sort type"
 abbr -a -- ping 'prettyping --nolegend'
 # abbr -a -- pr 'hub pull-request' # Already provided by (and better) `gh pr`
 abbr -a -- rm trash
