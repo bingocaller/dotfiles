@@ -1,18 +1,59 @@
-# Init zoxide - https://github.com/ajeetdsouza/zoxide
+fish_add_path /usr/local/sbin /Users/bingocaller/.cargo/bin /Users/bingocaller/go/bin
+
+# NOTE: All variables in this file are set using `--global` because it’s faster
+# than `--universal` and the variables will get set on every initialisation.
+
+# ╭───────╮
+# │ Shell │
+# ╰───────╯
+set --global fish_greeting # Don’t print welcome message for every new shell
+set --global SHELL (which fish) # Not sure this is necessary bit it can’t hurt
+set --global HISTTIMEFORMAT "%Y-%m-%d %T " # This one may or may not be useful
+set --global EDITOR nvim # Use Neovim as the editor for both line-based and
+set --global VISUAL nvim # visual purposes
+# Cursor configuration
+# Make it as Vim-like as possible, plus a bit of blinking in insert mode
+set --global fish_cursor_default block
+set --global fish_cursor_insert line blink
+set --global fish_cursor_replace_one underscore
+set --global fish_cursor_visual block
+
+# ╭───────────────╮
+# │ Tide (prompt) │
+# ╰───────────────╯
+set --global tide_git_icon 
+
+# ╭─────╮
+# │ FZF │
+# ╰─────╯
+set --global fzf_fd_opts "--hidden --type f"
+set --global FZF_DEFAULT_OPTS "\
+  --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+  --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+  --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+  --prompt='❯ ' --pointer='›' --marker='• '"
+
+# ╭───────────────────╮
+# │ zk (Zettelkasten) │
+# ╰───────────────────╯
+set --global ZK_NOTEBOOK_DIR "/Users/bingocaller/Documents/notes"
+
+# ╭────────╮
+# │ zoxide │
+# ╰────────╯
+# https://github.com/ajeetdsouza/zoxide
 zoxide init fish | source
 
-# Volta
-# set -gx VOLTA_HOME "$HOME/.volta"
-# set -gx PATH "$VOLTA_HOME/bin" $PATH
+# ╭───────╮
+# │ Volta │
+# ╰───────╯
+# set --export --global VOLTA_HOME "$HOME/.volta"
+# set --export --global PATH "$VOLTA_HOME/bin" $PATH
 
-# Set FZF UI, color scheme, and custom key bindings
-# Colour scheme made using https://minsw.github.io/fzf-color-picker/
-# Not acutally used, set at --universal variable from command line,
-# just kept here for documentation, I guess?
-# set -g FZF_DEFAULT_OPTS "--prompt='❯ ' --pointer='›' --marker='• ' --color=fg:#c0caf5,bg:#1a1b26,hl:#33467c --color=fg+:#e2ecff,bg+:#4d4e59,hl+:#a0a8d3 --color=info:#e2ecff,prompt:#f7768e,pointer:#bb9af7 --color=marker:#ff9e64,spinner:#9d7cd8,header:#9ece6a"
-
-# Abbreviations stored in `config.fish` from v3.6.0 as per recommended in
-# documentation
+# ╭───────────────╮
+# │ Abbreviations │
+# ╰───────────────╯
+# Stored in `config.fish` from v3.6.0 as per recommended in documentation
 # https://fishshell.com/docs/current/cmds/abbr.html
 abbr -a -- awdld 'ifconfig awdl0 down'
 abbr -a -- awdlu 'ifconfig awdl0 up'
