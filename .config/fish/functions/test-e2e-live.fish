@@ -1,3 +1,0 @@
-function test-e2e-live --wraps='make --directory frontend cypress-build; make --directory frontend build-docker-cypress; make --directory frontend stop-docker-cypress; make --directory frontend start-docker-cypress; make --directory frontend cypress-open' --description 'alias test-e2e-live=make --directory frontend cypress-build; make --directory frontend build-docker-cypress; make --directory frontend stop-docker-cypress; make --directory frontend start-docker-cypress; make --directory frontend cypress-open'
-  make --directory frontend cypress-build; make --directory frontend build-docker-cypress; make --directory frontend stop-docker-cypress; make --directory frontend start-docker-cypress; make --directory frontend cypress-open $argv; 
-end
