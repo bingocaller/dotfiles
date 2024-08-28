@@ -36,7 +36,7 @@ require("NotSpoons.windows")
 -- RELOAD CONFIG
 ---------------------
 -- Setup reload config message
-local reloadConfigMessage = message.new("arrows-rotate", "Font Awesome 6 Pro Solid")
+local reloadConfigMessage = message.new("")
 reloadConfigMessage.hidden = function()
 	reloadConfigMessage:hide()
 end

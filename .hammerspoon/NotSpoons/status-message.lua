@@ -3,13 +3,13 @@ local screen = require("hs.screen")
 local styledtext = require("hs.styledtext")
 
 local statusmessage = {}
-statusmessage.new = function(messageText, messageFont)
+statusmessage.new = function(text, fontSize)
 	local buildParts = function()
 		local frame = screen.primaryScreen():frame()
 
 		local styledTextAttributes = {
 			color = { hex = "fff" },
-			font = { name = messageFont or "Font Awesome 6 Pro", size = 128 },
+			font = { name = "MonaspiceNe Nerd Font Mono", size = fontSize or 192 },
 			paragraphStyle = {
 				alignment = "center",
 			},
@@ -26,7 +26,7 @@ statusmessage.new = function(messageText, messageFont)
 			},
 		}
 
-		local styledText = styledtext.new(messageText, styledTextAttributes)
+		local styledText = styledtext.new(text, styledTextAttributes)
 
 		local styledTextSize = drawing.getTextDrawingSize(styledText)
 		local paddedStyledTextWidth = styledTextSize.w + 40
@@ -79,7 +79,7 @@ statusmessage.new = function(messageText, messageFont)
 		show = function(self)
 			self:hide()
 
-			self.background, self.text = self._buildParts(messageText)
+			self.background, self.text = self._buildParts(text)
 			self.background:show()
 			self.text:show()
 		end,
@@ -96,9 +96,11 @@ statusmessage.new = function(messageText, messageFont)
 		notify = function(self, seconds)
 			seconds = seconds or 1
 			self:show()
-			hs.timer.delayed.new(seconds, function()
-				self:hide()
-			end):start()
+			hs.timer.delayed
+				.new(seconds, function()
+					self:hide()
+				end)
+				:start()
 		end,
 	}
 end

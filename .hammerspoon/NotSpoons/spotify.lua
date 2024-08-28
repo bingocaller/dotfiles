@@ -4,7 +4,7 @@ local message = require("NotSpoons.status-message")
 ---------------------
 local spotifyIcon = hs.image.imageFromAppBundle("com.spotify.client")
 -- Setup Spotify message
-local spotifyMessage = message.new("spotify", "Font Awesome 6 Brands")
+local spotifyMessage = message.new("󰓇")
 spotifyMessage.hidden = function()
 	spotifyMessage:hide()
 end

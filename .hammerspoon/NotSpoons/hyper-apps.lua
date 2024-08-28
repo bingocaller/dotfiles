@@ -7,32 +7,32 @@
 -- d (Do Not Disturb)
 return {
 	-- "F" for "Firefox"
-	{ "f", "Firefox Developer Edition", "firefox-browser", "Font Awesome 6 Brands" },
+	{ "f", "Firefox Developer Edition", "󰈹" },
 	-- "G" for "Google Chrome"
-	{ "g", "Google Chrome", "chrome", "Font Awesome 6 Brands" },
+	{ "g", "Google Chrome", "" },
 	-- "I" for "iTerm"
 	-- { 'i', 'iTerm', '', 'Font Awesome 6 Pro Solid' },
 	-- "I" for "kItty"
-	{ "i", "kitty", "cat-space", "Font Awesome 6 Pro Solid" },
+	{ "i", "kitty", "󰄛" },
 	-- "M" for "Mail"
-	{ "m", "Mail", "" },
+	{ "m", "Mail", "󰁥" },
 	-- "N" for "Notion"
-	{ "n", "Notion", "typewriter", "Font Awesome 6 Pro Solid" },
+	{ "n", "Notion", "󱔘" },
 	-- "O" for "pOcket Casts"
-	{ "o", "Pocket Casts", "", "Font Awesome 6 Pro Solid" },
+	{ "o", "Pocket Casts", "" },
 	-- "P" for "Plug"
-	{ "p", "Plug", "circle-heart", "Font Awesome 6 Pro Solid" },
+	{ "p", "Plug", "󰥱" },
 	-- "R" for "discoRd"
-	{ "r", "Discord", "discord", "Font Awesome 6 Brands" },
+	{ "r", "Discord", "󰙯" },
 	-- "S" for "Slack"
-	{ "s", "Slack", "slack", "Font Awesome 6 Brands" },
+	{ "s", "Slack", "" },
 	-- "T" for "Tidal"
 	-- { "t", "Tidal", "waveform-lines", "Font Awesome 6 Pro Solid" },
-	{ "t", "Tidal", "gramophone", "Font Awesome 6 Pro Solid" },
+	{ "t", "Tidal", "󰓃", 144 },
 	-- "V" for "Visual Studio Code/VSCodium"
-	{ "v", "VSCodium", "code", "Font Awesome 6 Pro Solid" },
+	-- { "v", "VSCodium", "" },
 	-- "X" for "Xcode"
 	-- { 'x', 'Xcode', 'hammer', 'Font Awesome 6 Pro Solid' },
 	-- "Z" for "Zoom"
-	{ "z", "zoom.us", "circle-video", "Font Awesome 6 Pro Solid" },
+	{ "z", "zoom.us", "" },
 }

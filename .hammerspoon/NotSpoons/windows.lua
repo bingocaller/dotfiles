@@ -27,7 +27,7 @@ hs.window.animationDuration = 0
 
 local windowLayoutMode = hs.hotkey.modal.new({}, "F16")
 
-windowLayoutMode.statusMessage = message.new("")
+windowLayoutMode.statusMessage = message.new("󰝘")
 windowLayoutMode.entered = function()
 	windowLayoutMode.statusMessage:show()
 end

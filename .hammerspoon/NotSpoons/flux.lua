@@ -3,8 +3,8 @@
 ---------------------
 local message = require("NotSpoons.status-message")
 -- Setup Flux message
-local fluxActiveMessage = message.new("sunset")
-local fluxInactiveMessage = message.new("sunrise")
+local fluxActiveMessage = message.new("")
+local fluxInactiveMessage = message.new("")
 fluxActiveMessage.hidden = function()
 	fluxActiveMessage:hide()
 end
