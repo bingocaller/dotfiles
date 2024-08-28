@@ -7,7 +7,7 @@ fish_add_path /usr/local/sbin /Users/bingocaller/.cargo/bin /Users/bingocaller/g
 # │ Shell │
 # ╰───────╯
 set --global fish_greeting # Don’t print welcome message for every new shell
-set --global SHELL (which fish) # Not sure this is necessary bit it can’t hurt
+set --global SHELL (which fish) # Not sure this is necessary but it can’t hurt
 set --global HISTTIMEFORMAT "%Y-%m-%d %T " # This one may or may not be useful
 set --global EDITOR nvim # Use Neovim as the editor for both line-based and
 set --global VISUAL nvim # visual purposes
@@ -37,7 +37,7 @@ set --global FZF_DEFAULT_OPTS "\
 # ╭───────────────────╮
 # │ zk (Zettelkasten) │
 # ╰───────────────────╯
-set --global ZK_NOTEBOOK_DIR "/Users/bingocaller/Documents/notes"
+set --global ZK_NOTEBOOK_DIR /Users/bingocaller/Documents/notes
 
 # ╭────────╮
 # │ zoxide │
