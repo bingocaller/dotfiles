@@ -14,18 +14,18 @@ vim.g.vim_markdown_conceal = 0
 vim.g.vim_markdown_frontmatter = 1
 vim.g.vim_markdown_toml_frontmatter = 1
 vim.g.vim_markdown_json_frontmatter = 1
-vim.g.vim_markdown_fenced_languages = {
-	"bash",
-	"css",
-	"html",
-	"javascript",
-	"lua",
-	"scss",
-	"sh",
-	"typescript",
-	"vim",
-}
+-- vim.g.vim_markdown_fenced_languages = {
+-- 	"bash",
+-- 	"css",
+-- 	"html",
+-- 	"javascript",
+-- 	"lua",
+-- 	"scss",
+-- 	"sh",
+-- 	"typescript",
+-- 	"vim",
+-- }
 -- Move Markdown_CreateLink to Control-l instead of Control-k, to not override
 -- digraph functionality. (:h digraphs-use)
 -- vim.keymap.set("i", "<Plug>", "<Plug>Markdown_CreateLink", {})
-vim.keymap.set("i", "<C-l>", "<Plug>Markdown_CreateLink", {})
+vim.keymap.set("i", "<C-l>", "<Plug>Markdown_CreateLink", { desc = "Markdown: create link" })

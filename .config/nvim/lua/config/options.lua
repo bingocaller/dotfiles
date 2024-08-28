@@ -1,10 +1,6 @@
--- Show relative line numbers in gutter
-vim.opt.number = true
-vim.opt.relativenumber = true
-
--- Always show the signcolumn, otherwise it would shift the text each time
--- diagnostics appear/become resolved.
-vim.opt.signcolumn = "yes"
+-- Options are automatically loaded before lazy.nvim startup
+-- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
+-- Add any additional options here
 
 -- Indentation
 vim.opt.tabstop = 4
@@ -12,21 +8,15 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
 
--- Do extra smart auto-indentation
-vim.opt.smartindent = true
+-- DON'T use the system clipboard for yanking, deleting, etc.
+vim.opt.clipboard = ""
 
 -- Show tabs and spaces as characters
-vim.opt.list = true
 vim.opt.listchars:append("tab:│  ,lead:·,trail:·")
 
--- Set line length limit and highlight the boundary
+-- Set default line length limit and highlight the boundary
 vim.opt.textwidth = 80
 vim.opt.colorcolumn = "+1"
-
--- Don't (soft) wrap lines by default
-vim.opt.wrap = false
--- When wrapping, don't break in the middle of words
-vim.opt.linebreak = true
 
 -- Don't conceal characters (in links and text formatting).
 vim.opt.conceallevel = 0
@@ -34,38 +24,22 @@ vim.opt.conceallevel = 0
 -- Use British English and Danish for spelling
 vim.opt.spelllang = "en_gb,da"
 
--- Open new split panes to right and bottom, which feels more natural
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 8
 -- The minimal number of screen columns to keep to the left and to the right of
 -- the cursor if 'nowrap' is set.
 vim.opt.sidescrolloff = 8
 
--- We don't want to deal with this in .gitignore
-vim.opt.swapfile = false
-
--- Some servers have issues with backup files.
--- See https://github.com/neoclide/coc.nvim/issues/649
-vim.opt.backup = false
-vim.opt.writebackup = false
-
 -- Don't drop undo history when abandoning a buffer
 -- 2022-01-07: Experimentally remove this in favour of undofile
 vim.opt.hidden = false
 
 -- Persistent undo, requires the presence of ~/.vim/undodir directory!
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
 -- Use incremental search, i.e. show results as you type
 vim.opt.incsearch = true
-
--- Ignore case unless capital letters are used
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
 
 -- Assume the /g flag on :s substitutions to replace all matches in a line.
 -- Can be disabled on a case-by-case basis by appending /g.
@@ -78,23 +52,11 @@ vim.opt.isfname:append("@-@")
 -- Show partial command keys in the status line
 vim.opt.showcmd = true
 
--- Automatically :write before running commands
-vim.opt.autowrite = true
-
---  Make search/replace interactive without the split pane
-vim.opt.inccommand = "nosplit"
-
 -- Disable modelines as a security precaution
 vim.opt.modelines = 0
 
--- _Fast_ updates
-vim.opt.updatetime = 50
-
--- Don't pass messages to |ins-completion-menu|.
-vim.opt.shortmess:append("c")
-
--- Show a global statusline instead of one for each window (Neovim only)
-vim.opt.laststatus = 3
+-- Allow for using more memory for patterns
+vim.opt.maxmempattern = 5000 -- Default is 1000
 
 -------------
 -- Filetypes
@@ -103,29 +65,21 @@ vim.opt.laststatus = 3
 vim.filetype.add({
 	extension = {
 		njk = "htmldjango",
+		markdownlintrc = "jsonc",
 	},
 })
 
+-- Node Provider setup
+vim.g.node_host_prog = "/usr/local/bin/neovim-node-host"
+
 -- Always use Python 3
 vim.opt.pyxversion = 3
-vim.g.python3_host_prog = "/usr/local/bin/python3.11"
+vim.g.python3_host_prog = "/usr/local/bin/python"
 -- Don't load Python2 provider
 vim.g.loaded_python_provider = 0
 
--- Markdown syntax highlighting
-vim.g.markdown_fenced_languages = {
-	"bash",
-	"css",
-	"html",
-	"javascript",
-	"javascriptreact",
-	"lua",
-	"scss",
-	"sh",
-	"typescript",
-	"typescriptreact",
-	"vim",
-}
+-- Disable Ruby provider
+vim.g.loaded_ruby_provider = 0
 
 ----------------
 -- Abbreviations
@@ -138,3 +92,10 @@ vim.cmd("iabbrev chagne change")
 vim.cmd("iabbrev heigth height")
 vim.cmd("iabbrev teh the")
 vim.cmd("iabbrev widht width")
+
+-- LazyVim automatically configures lazygit:
+--  * theme, based on the active colorscheme.
+--  * editorPreset to nvim-remote
+--  * enables nerd font icons
+-- Set to false to disable.
+-- vim.g.lazygit_config = false

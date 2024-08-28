@@ -1,0 +1,35 @@
+{
+	"config": {
+		// Example markdownlint JSON(C) configuration with all properties set to
+		// their default value can be found at:
+		// https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.jsonc
+		// ---
+		// MD007/ul-indent - Unordered list indentation
+		// https://github.com/DavidAnson/markdownlint/blob/main/doc/md007.md
+		//"MD007": {
+		//	// Set up to be compatible with Prettier four-spaces indentation.
+		//	// https://github.com/DavidAnson/markdownlint/blob/main/doc/Prettier.md#list-item-indentation
+		//	"indent": 4
+		//},
+		// MD013/line-length - Line length
+		// https://github.com/DavidAnson/markdownlint/blob/main/doc/md013.md
+		"MD013": false, // Disable rule; it does more harm than good for my purposes
+		// MD025/single-title/single-h1 - Multiple top-level headings in the same document
+		// https://github.com/DavidAnson/markdownlint/blob/main/doc/md025.md
+		"MD025": {
+			// RegExp for matching title in front matter. An empty RegExp prevents
+			// front matter titles from being counted towards the number of
+			// top-level headings.
+			"front_matter_title": "",
+		},
+		// MD030/list-marker-space - Spaces after list markers
+		// https://github.com/DavidAnson/markdownlint/blob/main/doc/md030.md
+		//"MD030": {
+		//	// Set up to be compatible with Prettier four-spaces indentation.
+		//	// https://github.com/DavidAnson/markdownlint/blob/main/doc/Prettier.md#list-item-indentation
+		//	"ul_multi": 3,
+		//	"ul_single": 3
+		//}
+	},
+	"fix": true,
+}
