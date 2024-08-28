@@ -10,6 +10,7 @@ end)
 
 lsp_zero.format_on_save({
 	servers = {
+		html = { 'html', 'htmldjango' },
 		['lua_ls'] = { 'lua' },
 	}
 })
@@ -42,6 +43,11 @@ require('mason-lspconfig').setup({
 					-- "typescriptreact",
 					"vue",
 				}
+			})
+		end,
+		html = function()
+			require('lspconfig').html.setup({
+				filetypes = { "html", "htmldjango" }
 			})
 		end,
 		---- Configure lua language server for Neovim

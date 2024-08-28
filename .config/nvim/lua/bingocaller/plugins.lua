@@ -15,11 +15,52 @@ require("lazy").setup({
 	-- The colour scheme should be available when starting Neovim
 	{
 		"catppuccin/nvim",
-		name = "catppuccin",
 		priority = 1000, -- make sure to load this before all the other start plugins
 	},
 
-	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+	-- Treesitter and plugins
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+	},
+	{
+		-- Automatically close tags
+		"windwp/nvim-ts-autotag",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		ft = {
+			"astro",
+			"html",
+			"javascriptreact",
+			"markdown",
+			"svelte",
+			"typescript",
+			"typescriptreact",
+			"xml",
+		},
+		config = true,
+	},
+	-- {
+	-- 	-- Set commentstring based on location in file, using Treesitter
+	-- 	-- This is also covered by native Neovim (un)commenting functionality.
+	-- 	"JoosepAlviste/nvim-ts-context-commentstring",
+	-- 	dependencies = "nvim-treesitter/nvim-treesitter",
+	-- 	ft = {
+	-- 		"astro",
+	-- 		"html",
+	-- 		"javascript",
+	-- 		"javascriptreact",
+	-- 		"markdown",
+	-- 		"svelte",
+	-- 		"typescript",
+	-- 		"typescriptreact",
+	-- 		"xml",
+	-- 	},
+	-- 	config = true,
+	-- },
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+	},
 
 	-- LSP setup via LSP Zero
 	-- https://github.com/VonHeikemen/lsp-zero.nvim
@@ -36,6 +77,8 @@ require("lazy").setup({
 			{
 				-- Autocompletion
 				'hrsh7th/nvim-cmp',
+				version = false, -- last release is way too old
+				event = "InsertEnter",
 				dependencies = {
 					{
 						"f3fora/cmp-spell",
@@ -68,23 +111,16 @@ require("lazy").setup({
 	{
 		"pmizio/typescript-tools.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		ft = { "typescript", "typescriptreact" },
+		ft = {
+			"javascript",
+			"javascriptreact",
+			"typescript",
+			"typescriptreact",
+		},
 		-- Will implicitly call require(MAIN).setup({})
 		-- See `opts`/`config` here:
 		-- https://github.com/folke/lazy.nvim#-plugin-spec
 		opts = {},
-	},
-	{
-		-- Automatically close TSX tags
-		"windwp/nvim-ts-autotag",
-		ft = { "typescript", "typescriptreact" },
-		config = true,
-	},
-	{
-		-- Makes TSX comments actually work
-		"JoosepAlviste/nvim-ts-context-commentstring",
-		ft = { "typescript", "typescriptreact" },
-		config = true,
 	},
 
 	{
@@ -101,12 +137,18 @@ require("lazy").setup({
 	{
 		-- Telescope
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.4",
+		tag = "0.1.6",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 			-- Extensions
-			{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+			{
+				'nvim-telescope/telescope-fzf-native.nvim',
+				build = vim.fn.executable("make") == 1 and "make"
+					or
+					"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+				enabled = vim.fn.executable("make") == 1 or vim.fn.executable("cmake") == 1,
+			},
 		},
 	},
 	-- Improve the default vim.ui interfaces
@@ -135,15 +177,23 @@ require("lazy").setup({
 	{
 		-- Switch things around using `cx`
 		"tommcdo/vim-exchange",
-		keys = 'cx',
+		keys = {
+			'cx',
+			{ mode = 'v', 'cx' },
+		}
 	},
 	-- Abbreviation, Substitution, Coercion
 	"tpope/vim-abolish",
-	{
-		-- Toggle comments
-		"tpope/vim-commentary",
-		keys = 'gc',
-	},
+	-- Neovim now has built-in (un)commenting functionality, based on
+	-- vim-commentary
+	-- {
+	-- 	-- Toggle comments
+	-- 	"tpope/vim-commentary",
+	-- 	keys = {
+	-- 		'gc',
+	-- 		{ mode = 'v', 'gc' },
+	-- 	}
+	-- },
 	-- Git & Hub
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
@@ -152,7 +202,12 @@ require("lazy").setup({
 	-- Surround stuff with other stuff
 	{
 		"tpope/vim-surround",
-		keys = { 'cs', 'ds', 'ys', 'S' },
+		keys = {
+			'cs',
+			'ds',
+			'ys',
+			{ mode = 'v', 'S' },
+		},
 	},
 	-- Lots of mappings
 	"tpope/vim-unimpaired",

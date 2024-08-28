@@ -100,6 +100,12 @@ vim.opt.laststatus = 3
 -- Filetypes
 -------------
 
+vim.filetype.add({
+	extension = {
+		njk = "htmldjango",
+	},
+})
+
 -- Always use Python 3
 vim.opt.pyxversion = 3
 vim.g.python3_host_prog = "/usr/local/bin/python3.11"

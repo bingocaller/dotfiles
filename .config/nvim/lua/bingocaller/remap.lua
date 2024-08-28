@@ -27,10 +27,10 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- End of file
 vim.keymap.set("n", "G", "Gzz")
 -- Quickfixlist
-vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "[Q", "<cmd>cfirst<CR>zz")
-vim.keymap.set("n", "]Q", "<cmd>clast<CR>zz")
+vim.keymap.set("n", "[q", "[qzz")
+vim.keymap.set("n", "]q", "]qzz")
+vim.keymap.set("n", "[Q", "[Qzz")
+vim.keymap.set("n", "]Q", "]Qzz")
 
 -------------------
 -- Leader mappings
@@ -56,12 +56,7 @@ vim.keymap.set("n", "<leader>Y", [["+y$]])
 vim.keymap.set("n", "<leader>q", ":copen<cr>")
 
 -- Search and replace word under cursor for current buffer
-vim.keymap.set(
-	"n",
-	"<leader>r",
-	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/I<Left><Left>]],
-	{ noremap = true }
-)
+vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/I<Left><Left>]], { noremap = true })
 
 -- ----------------
 -- Window switching
@@ -85,6 +80,10 @@ vim.keymap.set("t", "<a-H>", "<c-\\><c-n><c-w>H")
 vim.keymap.set("t", "<a-J>", "<c-\\><c-n><c-w>J")
 vim.keymap.set("t", "<a-K>", "<c-\\><c-n><c-w>K")
 vim.keymap.set("t", "<a-L>", "<c-\\><c-n><c-w>L")
+
+-- Maximize/minimize current window
+vim.keymap.set("n", "<c-w>M", "<c-w>_ <c-w>|")
+vim.keymap.set("n", "<c-w>m", "<c-w>=")
 
 -- ----------------
 -- Tab switching

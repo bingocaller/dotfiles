@@ -1,4 +1,4 @@
-require("bingocaller.set") -- `mapleader` setup has to come before lazy loads
+require("bingocaller.set") -- `mapleader` setup has to come before plugins load
 require("bingocaller.remap")
 require("bingocaller.autocmd")
-require("bingocaller.lazy")
+require("bingocaller.plugins")

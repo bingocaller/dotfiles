@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
+	pattern = { "*.cjs", "*.js", "*.jsx", "*.mjs", "*.ts", "*.tsx" },
 	desc = "Auto-format JavaScript/TypeScript files after saving",
 	callback = function()
 		vim.cmd(":EslintFixAll")
