@@ -115,3 +115,6 @@ abbr -a -- tree 'tree -C'
 abbr -a -- yfd 'yarn frontend dev'
 abbr -a -- yfdl 'yarn frontend dev-local'
 abbr -a -- zkei 'zk edit --interactive'
+
+# Created by `pipx` on 2024-06-06 12:33:41
+set PATH $PATH /Users/bingocaller/.local/bin
