@@ -2,7 +2,6 @@
 	editor = nvim
 	excludesFile = ~/.gitignore_global
 	pager = delta
-  ; pager = diff-so-fancy | less --tabs=2 -RFX
 [user]
 	initials = JNJ
 	email = jesper.nellemann@gmail.com
@@ -13,18 +12,6 @@
 	interactive = auto
 	status = auto
 	ui = true
-; [color "diff-highlight"]
-;   oldNormal = red bold
-;   oldHighlight = red bold 52
-;   newNormal = green bold
-;   newHighlight = green bold 22
-; [color "diff"]
-;   meta = 11
-;   frag = magenta bold
-;   commit = yellow bold
-;   old = red bold
-;   new = green bold
-;   whitespace = red reverse
 [push]
 	default = simple
 	autoSetupRemote = true
@@ -32,7 +19,6 @@
 	rebase = true
 [commit]
 	template = ~/.git_commit_message
-  # template = ~/.git-commit-template
 [merge]
 	tool = vimdiff
 [mergetool]
@@ -52,9 +38,6 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-; [pager]
-;   diff = diff-so-fancy | less --tabs=2 -RFX
-;   show = diff-so-fancy | less --tabs=2 -RFX
 [interactive]
 	diffFilter = delta --color-only
 [delta]
