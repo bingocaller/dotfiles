@@ -50,6 +50,12 @@ zoxide init fish | source
 # set --export --global VOLTA_HOME "$HOME/.volta"
 # set --export --global PATH "$VOLTA_HOME/bin" $PATH
 
+# ╭──────────╮
+# │ lesspipe │
+# ╰──────────╯
+# https://github.com/wofr06/lesspipe
+set --global LESSOPEN "|/usr/local/bin/lesspipe.sh %s"
+
 # ╭───────────────╮
 # │ Abbreviations │
 # ╰───────────────╯
