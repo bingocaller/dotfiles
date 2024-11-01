@@ -14,12 +14,12 @@ return {
 		lazy = false, -- As https://github.com/nvimdev/dashboard-nvim/pull/450, dashboard-nvim shouldn't be lazy-loaded to properly handle stdin.
 		opts = function()
 			local logo = [[
-░░░    ░░ ░░░░░░░  ░░░░░░  ░░    ░░ ░░ ░░░    ░░░
-▒▒▒▒   ▒▒ ▒▒      ▒▒    ▒▒ ▒▒    ▒▒ ▒▒ ▒▒▒▒  ▒▒▒▒
-▒▒ ▒▒  ▒▒ ▒▒▒▒▒   ▒▒    ▒▒ ▒▒    ▒▒ ▒▒ ▒▒ ▒▒▒▒ ▒▒
-▓▓  ▓▓ ▓▓ ▓▓      ▓▓    ▓▓  ▓▓  ▓▓  ▓▓ ▓▓  ▓▓  ▓▓
-██   ████ ███████  ██████    ████   ██ ██      ██
-    ]]
+ ░░░    ░░ ░░░░░░░  ░░░░░░  ░░    ░░ ░░ ░░░    ░░░
+ ▒▒▒▒   ▒▒ ▒▒      ▒▒    ▒▒ ▒▒    ▒▒ ▒▒ ▒▒▒▒  ▒▒▒▒
+ ▒▒ ▒▒  ▒▒ ▒▒▒▒▒   ▒▒    ▒▒ ▒▒    ▒▒ ▒▒ ▒▒ ▒▒▒▒ ▒▒
+ ▓▓  ▓▓ ▓▓ ▓▓      ▓▓    ▓▓  ▓▓  ▓▓  ▓▓ ▓▓  ▓▓  ▓▓
+ ██   ████ ███████  ██████    ████   ██ ██      ██
+     ]]
 
 			logo = string.rep("\n", 8) .. logo .. "\n\n"
 
@@ -65,13 +65,15 @@ return {
 				button.key_format = "  %s"
 			end
 
-			-- close Lazy and re-open when the dashboard is ready
+			-- open dashboard after closing lazy
 			if vim.o.filetype == "lazy" then
-				vim.cmd.close()
-				vim.api.nvim_create_autocmd("User", {
-					pattern = "DashboardLoaded",
+				vim.api.nvim_create_autocmd("WinClosed", {
+					pattern = tostring(vim.api.nvim_get_current_win()),
+					once = true,
 					callback = function()
-						require("lazy").show()
+						vim.schedule(function()
+							vim.api.nvim_exec_autocmds("UIEnter", { group = "dashboard" })
+						end)
 					end,
 				})
 			end
@@ -89,20 +91,13 @@ return {
 			keys[#keys + 1] = { "<C-k>", mode = { "i" }, false }
 		end,
 		opts = {
-			-- Enable this to enable the builtin LSP inlay hints on Neovim >=
-			-- 0.10.0
-			-- Be aware that you also will need to properly configure your LSP
-			-- server to provide the inlay hints.
-			inlay_hints = {
-				enabled = true,
-			},
 			-- Enable this to enable the builtin LSP code lenses on Neovim >=
 			-- 0.10.0
 			-- Be aware that you also will need to properly configure your LSP
 			-- server to provide the code lenses.
-			codelens = {
-				enabled = true,
-			},
+			-- codelens = {
+			-- 	enabled = true,
+			-- },
 			servers = {
 				stylelint_lsp = {
 					cssInJs = true,
