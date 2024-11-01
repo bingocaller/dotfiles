@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Install Homebrew
-curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh &&
 
 # Install Homebrew packages
-cd ./homebrew && brew bundle --force cleanup && cd -
+cd ./homebrew && brew bundle --force cleanup && cd - &&
 
 # Set fish as default shell
 # From `login`’s manpage:
@@ -32,4 +32,4 @@ cd ./homebrew && brew bundle --force cleanup && cd -
 chsh -s 'login -fpql $(whoami) $(which fish)'
 
 # Install cargo stuff
-cargo install stylua
+# cargo install stylua
