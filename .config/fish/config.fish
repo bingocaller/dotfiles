@@ -37,7 +37,7 @@ set --global FZF_DEFAULT_OPTS "\
 # ╭───────────────────╮
 # │ zk (Zettelkasten) │
 # ╰───────────────────╯
-set --global ZK_NOTEBOOK_DIR /Users/bingocaller/Documents/notes
+set --export ZK_NOTEBOOK_DIR /Users/bingocaller/Documents/notes
 
 # ╭────────╮
 # │ zoxide │
