@@ -1,5 +1,3 @@
-fish_add_path /usr/local/sbin /Users/bingocaller/.cargo/bin /Users/bingocaller/go/bin
-
 # NOTE: All variables in this file are set using `--global` because it’s faster
 # than `--universal` and the variables will get set on every initialisation.
 
@@ -37,7 +35,7 @@ set --global FZF_DEFAULT_OPTS "\
 # ╭───────────────────╮
 # │ zk (Zettelkasten) │
 # ╰───────────────────╯
-set --export ZK_NOTEBOOK_DIR /Users/bingocaller/Documents/notes
+set --export ZK_NOTEBOOK_DIR "/Users/$(whoami)/Documents/notes"
 
 # ╭────────╮
 # │ zoxide │
@@ -55,7 +53,11 @@ zoxide init fish | source
 # │ lesspipe │
 # ╰──────────╯
 # https://github.com/wofr06/lesspipe
-set --global LESSOPEN "|/usr/local/bin/lesspipe.sh %s"
+if test (uname -m) = 'arm64'
+	set --global LESSOPEN "|/opt/homebrew/bin/lesspipe.sh %s"
+else
+	set --global LESSOPEN "|/usr/local/bin/lesspipe.sh %s"
+end
 
 # ╭───────────────╮
 # │ Abbreviations │
@@ -93,7 +95,7 @@ abbr -a -- gm 'git merge'
 abbr -a -- gpl 'git pull'
 abbr -a -- gplr 'git pull --rebase'
 abbr -a -- gps 'git push'
-abbr -a -- gpsf 'git push --force-with-lease'
+abbr -a -- gpsf 'git push --force-with-lease --force-if-includes'
 abbr -a -- gpsu 'git push --set-upstream origin (git branch --show-current)'
 abbr -a -- gr 'git remove --verbose'
 abbr -a -- grb 'git rebase'
@@ -113,9 +115,11 @@ abbr -a -- ping 'prettyping --nolegend'
 # abbr -a -- pr 'hub pull-request' # Already provided by (and better) `gh pr`
 abbr -a -- rm trash
 abbr -a -- tree 'tree -C'
-abbr -a -- yfd 'yarn frontend dev'
-abbr -a -- yfdl 'yarn frontend dev-local'
 abbr -a -- zkei 'zk edit --interactive'
 
-# Created by `pipx` on 2024-06-06 12:33:41
-set PATH $PATH /Users/bingocaller/.local/bin
+# pnpm
+set -gx PNPM_HOME "/Users/$(whoami)/Library/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+	fish_add_path $PNPM_HOME
+end
+# pnpm end
