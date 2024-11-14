@@ -46,16 +46,16 @@ return {
 		opts = {
 			use_default_keymaps = false,
 			langs = LazyVim.has("treesj")
-					and {
-						svg = require("treesj.langs.utils").merge_preset(
-							require("treesj.langs.html"),
-							{}
-						),
-						xml = require("treesj.langs.utils").merge_preset(
-							require("treesj.langs.html"),
-							{}
-						),
-					}
+				and {
+					svg = require("treesj.langs.utils").merge_preset(
+						require("treesj.langs.html"),
+						{}
+					),
+					xml = require("treesj.langs.utils").merge_preset(
+						require("treesj.langs.html"),
+						{}
+					),
+				}
 				or {},
 		},
 	},
@@ -102,6 +102,7 @@ return {
 		-- Used for Markdown preview (instead of markdown-preview.nvim, which
 		-- stopped working recently and seems unmaintained at the moment).
 		"jannis-baum/vivify.vim",
+		ft = "markdown",
 	},
 	{
 		-- Focus mode, Neovim-optimised
@@ -163,15 +164,4 @@ return {
 	-- 		code_lens = "all",
 	-- 	},
 	-- },
-	{
-		-- TypeScript type-checking on demand
-		"dmmulroy/tsc.nvim",
-		ft = {
-			"typescript",
-			"typescriptreact",
-		},
-		opts = {
-			use_trouble_qflist = true,
-		},
-	},
 }
