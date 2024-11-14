@@ -26,31 +26,12 @@ function update
     echo -e "╰──────────────────╯"
     brew cleanup
 
-
-    # Installing/upgrading Neovim via Homebrew works as long as the latest
-    # version of `utf8proc` is installed (`brew install utf8proc --HEAD`).
-
     # echo -e "╭─────────────────╮"
     # echo -e "│ UPDATING NEOVIM │"
     # echo -e "╰─────────────────╯"
-
-    # -- This also doesn’t work. Somehow it creates references to Lua files in
-    # -- `/Users/runner` instead of `/Users/bingocaller`.
-    # cd ~/Downloads
-    # curl --location --remote-name https://github.com/neovim/neovim/releases/download/nightly/nvim-macos-x86_64.tar.gz
-    # xattr -c ./nvim-macos-x86_64.tar.gz
-    # tar xzvf nvim-macos-x86_64.tar.gz
-    # cp nvim-macos-x86_64/bin/nvim /usr/local/bin/nvim
-    # cp -r nvim-macos-x86_64/lib/nvim /usr/local/lib/nvim
-    # cp -r nvim-macos-x86_64/share/nvim /usr/local/share/nvim
-
-    # -- Previous method: build from source. No longer used.
-    # cd ~/dev/neovim
-    # git pull
-    # make clean distclean
-    # make CMAKE_BUILD_TYPE=RelWithDebInfo
-    # sudo make install
-    # cd ~
+    # NOTE: Installing/upgrading Neovim via Homebrew works as long as the latest
+    # version of `utf8proc` is installed (`brew install utf8proc --HEAD`), so we
+	# don’t need to install/upgrade it here.
 
     echo -e "╭────────────╮"
     echo -e "│ NPM UPDATE │"
