@@ -24,6 +24,12 @@ return {
 		keys = ".",
 	},
 	{
+		-- Automatically set `'shiftwidth'`, `'expandtab'`, `'textwidth'`, etc.
+		-- based on the current file, its context, and EditorConfig.
+		"tpope/vim-sleuth",
+		event = { "LazyFile", "VeryLazy" },
+	},
+	{
 		-- Surround stuff with other stuff
 		"tpope/vim-surround",
 		keys = {

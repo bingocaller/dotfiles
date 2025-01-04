@@ -175,6 +175,21 @@ return {
 			},
 		},
 	},
+	{
+		"stevearc/conform.nvim",
+		opts = {
+			formatters_by_ft = {
+				-- Conform will run the first available formatter
+				javascript = {
+					"eslint_d",
+					"eslint",
+					"prettierd",
+					"prettier",
+					stop_after_first = true,
+				},
+			},
+		},
+	},
 
 	-- Disabled for now, since neotest-jest is causing problems.
 	-- {
