@@ -53,10 +53,10 @@ zoxide init fish | source
 # │ lesspipe │
 # ╰──────────╯
 # https://github.com/wofr06/lesspipe
-if test (uname -m) = 'arm64'
-	set --global LESSOPEN "|/opt/homebrew/bin/lesspipe.sh %s"
+if test (uname -m) = arm64
+    set --global LESSOPEN "|/opt/homebrew/bin/lesspipe.sh %s"
 else
-	set --global LESSOPEN "|/usr/local/bin/lesspipe.sh %s"
+    set --global LESSOPEN "|/usr/local/bin/lesspipe.sh %s"
 end
 
 # ╭───────────────╮
@@ -120,6 +120,9 @@ abbr -a -- zkei 'zk edit --interactive'
 # pnpm
 set -gx PNPM_HOME "/Users/$(whoami)/Library/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
-	fish_add_path $PNPM_HOME
+    fish_add_path $PNPM_HOME
 end
 # pnpm end
+
+# uv (python, pyenv, pip management)
+# uv generate-shell-completion fish | source
