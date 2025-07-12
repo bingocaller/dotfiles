@@ -62,3 +62,5 @@
 	defaultBranch = main
 [status]
 	relativePaths = true
+[hub]
+	protocol = ssh
