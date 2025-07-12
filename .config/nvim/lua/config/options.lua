@@ -66,6 +66,7 @@ vim.filetype.add({
 	extension = {
 		njk = "htmldjango",
 		markdownlintrc = "jsonc",
+		webc = "html",
 	},
 })
 
