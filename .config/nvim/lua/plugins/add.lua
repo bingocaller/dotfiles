@@ -47,7 +47,15 @@ return {
 	{
 		-- Split/join blocks of code
 		"Wansmer/treesj",
-		keys = { "<leader>m" },
+		keys = {
+			{
+				"<leader>m",
+				function()
+					require("treesj").toggle()
+				end,
+				desc = "Treesj: toggle",
+			},
+		},
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		opts = {
 			use_default_keymaps = false,
