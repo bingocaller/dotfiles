@@ -107,7 +107,9 @@ vim.diagnostic.config({
 -- TODO: Use vim-abolish for these
 vim.cmd("iabbrev borad board")
 vim.cmd("iabbrev chagne change")
+vim.cmd("iabbrev fitler filter")
 vim.cmd("iabbrev heigth height")
+vim.cmd("iabbrev serach search")
 vim.cmd("iabbrev teh the")
 vim.cmd("iabbrev widht width")
 
