@@ -1,4 +1,10 @@
 .DS_Store
+Brewfile.lock.json
+
+.config/configstore
+.config/op
+
+packer_compiled.lua
 
 #──────╮
 # Fish │
@@ -6,23 +12,24 @@
 fishd.tmp.*
 fish_variables
 # Plugin functions
-.config/fish/completions
+.config/fish/completions/
 .config/fish/conf.d/
 .config/fish/functions/_*.fish
+.config/fish/functions/fisher*.fish
+.config/fish/functions/fzf*.fish
+.config/fish/functions/nvm.fish
 .config/fish/functions/fish_prompt.fish
 .config/fish/functions/tide*
 
 #───────────╮
 # Karabiner │
 #───────────╯
-.config/karabiner/automatic_backups
+.config/karabiner/automatic_backups/
 
 #────────────╮
 # Vim/Neovim │
 #────────────╯
 vim/.vim/.netrwhist
-vim/.vim/plugged
-vim/.vim/undodir
-
-.config/nvim/spell
-packer_compiled.lua
+vim/.vim/plugged/
+vim/.vim/undodir/
+.config/nvim/spell/
