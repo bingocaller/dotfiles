@@ -40,16 +40,28 @@ return {
 		end,
 		opts = {
 			servers = {
+				vtsls = {
+					-- Annoyingly, `root_markers` doesn’t work as expected.
+					-- This is based on the implementation in
+					-- https://github.com/LazyVim/LazyVim/blob/25abbf546d564dc484cf903804661ba12de45507/lua/lazyvim/plugins/extras/lang/ocaml.lua#L29-L39
+					root_dir = function(fname)
+						return require("lspconfig.util").root_pattern(
+							"nx.json",
+							"tsconfig.base.json"
+						)(fname)
+					end,
+				},
 				stylelint_lsp = {
-					cssInJs = true,
 					filetypes = {
+						"astro",
 						"css",
-						"javascriptreact",
+						-- "javascriptreact",
 						"less",
 						"sass",
 						"scss",
 						"sugarss",
-						"typescriptreact",
+						"svelte",
+						-- "typescriptreact",
 						"vue",
 						"wxss",
 					},
@@ -102,13 +114,22 @@ return {
 		"stevearc/conform.nvim",
 		opts = {
 			formatters_by_ft = {
+				css = { "stylelint" },
+				scss = { "stylelint" },
 				-- Conform will run the first available formatter
 				javascript = {
-					"eslint_d",
-					"eslint",
 					"prettierd",
-					"prettier",
-					stop_after_first = true,
+					"eslint_d",
+					-- "prettier",
+				},
+				typescript = {
+					"prettierd",
+					"eslint_d",
+					-- "prettier",
+				},
+				svg = {
+					"xmlformatter",
+					"prettierd",
 				},
 			},
 		},
