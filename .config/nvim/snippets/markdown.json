@@ -1,0 +1,46 @@
+{
+  "pr": {
+    "prefix": "templ-pr",
+    "description": "Pull request template",
+    "body": [
+      "## ❓ Why",
+      "",
+      "$1",
+      "",
+      "## ❗️ What",
+      "",
+      "$2",
+      "",
+      "## 🖼️ Screenshots/recordings",
+      "",
+      "$3",
+      "",
+      "## 🎟️ Related PRs/tickets",
+      "",
+      "$0"
+    ]
+  },
+  "retro": {
+    "prefix": "templ-retro",
+    "description": "Retro items template",
+    "body": [
+      "# Retro items",
+      "",
+      "## What went right/keep doing",
+      "",
+      "### $1",
+      "",
+      "## What went wrong/stop doing",
+      "",
+      "### $2",
+      "",
+      "## What we learned/start doing",
+      "",
+      "### $3",
+      "",
+      "## Kudos",
+      "",
+      "- $0"
+    ]
+  }
+}
