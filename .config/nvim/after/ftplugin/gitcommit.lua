@@ -9,7 +9,8 @@ vim.opt_local.expandtab = true
 
 -- Set line length cut-off for body and highlight cut-off for title (body line
 -- length limit is highlighted by default, see bingocaller/set.lua)
--- vim.opt_local.textwidth = 72 -- This is set by default
+vim.opt_local.textwidth = 72
+-- Show the (soft) threshold for commit titles.
 vim.opt_local.colorcolumn:append("51")
 
 -- Start in insert mode at end of the first line. Basically, saves typing A
