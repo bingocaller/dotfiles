@@ -5,9 +5,4 @@ json-server
 neovim
 npm-check
 npm
-stylelint-config-idiomatic-order
-stylelint-config-sass-guidelines
-stylelint-config-standard
-stylelint-config-styled-components
-stylelint-scss
 svgo
