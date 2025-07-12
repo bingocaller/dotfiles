@@ -39,13 +39,6 @@ return {
 			keys[#keys + 1] = { "<C-k>", mode = { "i" }, false }
 		end,
 		opts = {
-			-- Enable this to enable the builtin LSP code lenses on Neovim >=
-			-- 0.10.0
-			-- Be aware that you also will need to properly configure your LSP
-			-- server to provide the code lenses.
-			-- codelens = {
-			-- 	enabled = true,
-			-- },
 			servers = {
 				stylelint_lsp = {
 					cssInJs = true,
@@ -62,24 +55,6 @@ return {
 					},
 				},
 			},
-			-- you can do any additional lsp server setup here
-			-- return true if you don't want this server to be setup with
-			-- lspconfig
-			-- setup = {
-			-- 	-- example to setup with typescript.nvim
-			-- 	-- tsserver = function(_, opts)
-			-- 	--   require("typescript").setup({ server = opts })
-			-- 	--   return true
-			-- 	-- end,
-			-- 	-- Specify * to use this function as a fallback for any server
-			-- 	-- ["*"] = function(server, opts) end,
-			--
-			-- 	-- Disable tsserver (typescript-language-server) in favour of
-			-- 	-- typescript-tools
-			-- 	tsserver = function()
-			-- 		return true
-			-- 	end,
-			-- },
 		},
 	},
 	{
@@ -205,59 +180,5 @@ return {
 	-- 			-- },
 	-- 		},
 	-- 	},
-	-- },
-
-	-- -- add more treesitter parsers
-	-- {
-	--   "nvim-treesitter/nvim-treesitter",
-	--   opts = {
-	--     ensure_installed = {
-	--       "bash",
-	--       "html",
-	--       "javascript",
-	--       "json",
-	--       "lua",
-	--       "markdown",
-	--       "markdown_inline",
-	--       "python",
-	--       "query",
-	--       "regex",
-	--       "tsx",
-	--       "typescript",
-	--       "vim",
-	--       "yaml",
-	--     },
-	--   },
-	-- },
-	--
-	-- -- since `vim.tbl_deep_extend`, can only merge tables and not lists, the
-	-- -- code above would overwrite `ensure_installed` with the new value.
-	-- -- If you'd rather extend the default config, use the code below instead:
-	-- {
-	--   "nvim-treesitter/nvim-treesitter",
-	--   opts = function(_, opts)
-	--     -- add tsx and treesitter
-	--     vim.list_extend(opts.ensure_installed, {
-	--       "tsx",
-	--       "typescript",
-	--     })
-	--   end,
-	-- },
-	--
-	-- -- add jsonls and schemastore packages, and setup treesitter for json, json5
-	-- -- and jsonc
-	-- { import = "lazyvim.plugins.extras.lang.json" },
-	--
-	-- -- add any tools you want to have installed below
-	-- {
-	--   "williamboman/mason.nvim",
-	--   opts = {
-	--     ensure_installed = {
-	--       "stylua",
-	--       "shellcheck",
-	--       "shfmt",
-	--       "flake8",
-	--     },
-	--   },
 	-- },
 }
