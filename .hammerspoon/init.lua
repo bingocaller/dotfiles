@@ -4,6 +4,7 @@ require("NotSpoons.caffeine")
 require("NotSpoons.flux")
 require("NotSpoons.hyper")
 require("NotSpoons.push-to-talk")
+-- require("NotSpoons.shade")
 -- require("NotSpoons.tidal")
 require("NotSpoons.windows")
 

@@ -1,17 +1,18 @@
 -- Reserved by other apps/functions (see .hammerspoon/init.lua):
 -- c (Caffeine),
 -- l (Flux),
--- t (Tidal),
--- s (Shade),
+-- h (sHade),
 -- = (Mute/Unmute)
 -- d (Do Not Disturb)
 return {
+	-- "A" for "Asana"
+	{ "a", "Asana", "󰊱" },
+	-- "E" for "mEet"
+	{ "e", "Google Meet", "" },
 	-- "F" for "Firefox"
 	{ "f", "Firefox Developer Edition", "󰈹" },
 	-- "G" for "Google Chrome"
 	{ "g", "Google Chrome", "" },
-	-- "I" for "iTerm"
-	-- { 'i', 'iTerm', '', 'Font Awesome 6 Pro Solid' },
 	-- "I" for "kItty"
 	{ "i", "kitty", "󰄛" },
 	-- "M" for "Mail"
@@ -23,16 +24,13 @@ return {
 	-- "P" for "Plug"
 	{ "p", "Plug", "󰥱" },
 	-- "R" for "discoRd"
-	{ "r", "Discord", "󰙯" },
+	-- { "r", "Discord", "󰙯" },
 	-- "S" for "Slack"
 	{ "s", "Slack", "" },
 	-- "T" for "Tidal"
-	-- { "t", "Tidal", "waveform-lines", "Font Awesome 6 Pro Solid" },
 	{ "t", "Tidal", "󰓃", 144 },
-	-- "V" for "Visual Studio Code/VSCodium"
-	-- { "v", "VSCodium", "" },
-	-- "X" for "Xcode"
-	-- { 'x', 'Xcode', 'hammer', 'Font Awesome 6 Pro Solid' },
-	-- "Z" for "Zoom"
-	{ "z", "zoom.us", "" },
+	-- "W" for "docker (It’s a Whale. Get it?)"
+	{ "w", "Docker", "󰡨" },
+	-- "Z" for "Zen Twilight"
+	{ "z", "Zen Twilight", "⦿" },
 }

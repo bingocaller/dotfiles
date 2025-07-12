@@ -6,4 +6,4 @@ hs.loadSpoon("SpoonInstall")
 
 spoon.SpoonInstall:andUse("Shade")
 spoon.Shade.shadeTransparency = 0.25
-spoon.Shade:bindHotkeys({ toggleShade = { { "cmd", "alt", "ctrl", "shift" }, "s" } })
+spoon.Shade:bindHotkeys({ toggleShade = { { "cmd", "alt", "ctrl", "shift" }, "h" } })

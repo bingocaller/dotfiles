@@ -5,7 +5,7 @@ local styledtext = require("hs.styledtext")
 local statusmessage = {}
 statusmessage.new = function(text, fontSize)
 	local buildParts = function()
-		local frame = screen.primaryScreen():frame()
+		local frame = screen.primaryScreen():fullFrame()
 
 		local styledTextAttributes = {
 			color = { hex = "fff" },
@@ -41,7 +41,7 @@ statusmessage.new = function(text, fontSize)
 			-- w = styledTextSize.w + 40,
 			-- h = styledTextSize.h + 40,
 		}
-		local text = drawing.text(textRect, styledText):setAlpha(0.9)
+		local foreground = drawing.text(textRect, styledText):setAlpha(0.9)
 
 		local background = drawing.rectangle({
 			x = 0,
@@ -71,7 +71,7 @@ statusmessage.new = function(text, fontSize)
 		-- background:setStrokeColor({ hex = '2d2d2d' })
 		-- background:setStrokeWidth(10)
 
-		return background, text
+		return background, foreground
 	end
 
 	return {
