@@ -71,11 +71,11 @@ vim.filetype.add({
 })
 
 -- Node Provider setup
-vim.g.node_host_prog = "/usr/local/bin/neovim-node-host"
+vim.g.node_host_prog = "/opt/homebrew/bin/neovim-node-host"
 
 -- Always use Python 3
 vim.opt.pyxversion = 3
-vim.g.python3_host_prog = "/usr/local/bin/python"
+vim.g.python3_host_prog = "/Users/jesper/.pyenv/versions/neovim/bin/python"
 -- Don't load Python2 provider
 vim.g.loaded_python_provider = 0
 
