@@ -8,41 +8,27 @@ return {
 	{
 		-- Switch things around using `cx`
 		"tommcdo/vim-exchange",
-		keys = {
-			"cx",
-			{ mode = "v", "cx" },
-		},
 	},
 	{
 		-- Abbreviation, Substitution, Coercion
 		"tpope/vim-abolish",
-		event = { "LazyFile", "VeryLazy" },
 	},
 	{
 		-- Enable repeating lots more stuff
 		"tpope/vim-repeat",
-		keys = ".",
 	},
 	{
 		-- Automatically set `'shiftwidth'`, `'expandtab'`, `'textwidth'`, etc.
 		-- based on the current file, its context, and EditorConfig.
 		"tpope/vim-sleuth",
-		event = { "LazyFile", "VeryLazy" },
 	},
 	{
 		-- Surround stuff with other stuff
 		"tpope/vim-surround",
-		keys = {
-			"cs",
-			"ds",
-			"ys",
-			{ mode = "v", "S" },
-		},
 	},
 	{
 		-- Lots of mappings
 		"tpope/vim-unimpaired",
-		event = { "LazyFile", "VeryLazy" },
 	},
 	{
 		-- Split/join blocks of code
