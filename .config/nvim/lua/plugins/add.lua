@@ -95,7 +95,31 @@ return {
 		cmd = "G",
 	},
 
+	{
+		"Equilibris/nx.nvim",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+		},
+		opts = {
+			-- See below for config options
+			nx_cmd_root = "npx nx",
+		},
+		-- Plugin will load when you use these keys
+		keys = {
+			{
+				"<leader>pn", -- Mnemonic: Project Nx
+				"<cmd>Telescope nx actions<CR>",
+				desc = "nx actions",
+			},
+		},
+	},
+
 	-- Tools for writing
+	{
+		"davidmh/mdx.nvim",
+		opts = {},
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+	},
 	{
 		-- Markdown batteries
 		"ixru/nvim-markdown",
